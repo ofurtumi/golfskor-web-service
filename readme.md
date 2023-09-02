@@ -3,7 +3,7 @@
 ## Hópur
 
 - Þorvaldur Tumi Baldursson - [@ofurtumi](github.com/ofurtumi)
-
+- Hákon Ingi Rafnsson -[@hakoningir](github.com/hakoningir)
 ## Uppsetning
 
 Það þarf postgres server keyrandi á porti `5432` og verkefnið sett upp á móti honum. Stillingar eru gerðar í [þessari skrá](./src/main/resources/application.properties), stillingarnar útskýra sig nokkuð vel sjálfar.
