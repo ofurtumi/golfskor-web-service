@@ -450,3 +450,16 @@ $RECYCLE.BIN/
 *_BASE_*.txt
 *_LOCAL_*.txt
 *_REMOTE_*.txt
+
+
+### Emacs ###
+# Addeg by Gunnar to make sure the temp files from emacs don't get added to git
+# -*- mode: gitignore; -*-
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
