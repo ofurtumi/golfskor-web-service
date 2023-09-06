@@ -14,3 +14,33 @@
 ## Keyrsla
 
 Til að geta keyrt verkefnið upp þarf maven að vera sett upp á vélinni, hægt að nota `brew install maven` á Mac eða svipaða skipun á Linux. Til að keyra upp verkefnið þarf að keyra `mvn spring-boot:run` í rót verkefnisins. Verkefnið er aðgengilegt á `localhost:8080` eftir að það hefur keyrt upp.
+
+## Feature
+
+### 1. Skrá notanda
+
+- Geta nýskráð
+- Geta skráð inn
+- Geta skráð út
+
+### 2. Skrá stig
+
+- Skrá skor
+
+### 3. Skoða stig
+
+- Skoða par fyrir völ
+- Skoða hring fyrir völl
+- Skoða hring annara spilara útfrá völlum top 5 eða ehv
+
+### 4. Uppfæra stig
+
+- Fá hring í hendurnar
+
+### 5. Eyða stigum
+
+- Eyðir hring
+
+### 6. Reikna forgjöf
+
+- Meðaltal af bestu 8 síðustu 20 leiki
