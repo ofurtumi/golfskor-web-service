@@ -17,30 +17,36 @@ Til að geta keyrt verkefnið upp þarf maven að vera sett upp á vélinni, hæ
 
 ## Feature
 
-### 1. Skrá notanda
+### 1. Skrá stig
+
+- Skrá skor
+
+### 2. Skoða stiga sögu útfrá velli
+
+- Skoða par fyrir völl
+
+### 3. Skoða sína eigin stigasögu
+
+- Skoða hring fyrir völl
+
+### 4. Raða stigum útfrá velli
+
+- Skoða hring annara spilara útfrá völlum top 5 eða ehv
+
+### 5. Uppfæra stig
+
+- Fá hring í hendurnar
+
+### 6. Eyða stigum
+
+- Eyðir hring
+
+### 7. Reikna forgjöf
+
+- Meðaltal af bestu 8 síðustu 20 leiki
+
+### 8. Skrá notanda
 
 - Geta nýskráð
 - Geta skráð inn
 - Geta skráð út
-
-### 2. Skrá stig
-
-- Skrá skor
-
-### 3. Skoða stig
-
-- Skoða par fyrir völ
-- Skoða hring fyrir völl
-- Skoða hring annara spilara útfrá völlum top 5 eða ehv
-
-### 4. Uppfæra stig
-
-- Fá hring í hendurnar
-
-### 5. Eyða stigum
-
-- Eyðir hring
-
-### 6. Reikna forgjöf
-
-- Meðaltal af bestu 8 síðustu 20 leiki
