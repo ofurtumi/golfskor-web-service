@@ -1,0 +1,13 @@
+<html xmlns:th="https://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Signup</title>
+</head>
+<body>
+  <h2>Signup for an account</h2>
+    <form action="#" th:action="@{/round/${current_course.id}}" th:object="${user}"  method="post">
+      <input type="submit" value="Sign up"/>
+  </form>
+  <p th:text="${error}" />
+</body>
+</html>

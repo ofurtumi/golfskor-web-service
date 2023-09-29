@@ -1,8 +1,6 @@
 package is.hi.hugbo.model;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "users", uniqueConstraints = {
@@ -13,12 +11,8 @@ public class User {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private long id;
 
-  @NotBlank
-  @Size(max = 20)
   private String username;
 
-  @NotBlank
-  @Size(max = 120)
   private String password;
 
   public User() {
@@ -31,6 +25,18 @@ public class User {
 
   public long getId() {
     return id;
+  }
+
+  public void setId(long id) {
+    this.id = id;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 
   public String getUsername() {

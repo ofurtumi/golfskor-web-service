@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GolfSkor</title>
+</head>
+<body>
+<section th:each="course: ${courses}">
+    <a th:href="'courses/' + ${course.id}" >
+      <td th:text="${course.courseName}" />
+    </a>
+    <a th:if="${user != null}" th:href="'round/ + '${course.id}">Skrá hring</a>
+
+    <ul th:each="round: ${course.rounds}">
+      <li>
+          <p th:text="${round.user.username}" />
+          <ul th:each="hole: ${round.holes}">
+            <li th:text="${hole}" />
+          </ul>
+      </li>
+    </ul>
+</section>
+</body>
+</html>

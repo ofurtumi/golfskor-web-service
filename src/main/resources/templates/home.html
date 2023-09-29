@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>GolfSkor</title>
+</head>
+<body>
+
+    <h1>GolfSkor</h1>
+    <h2>Velkommen til GolfSkor</h2> 
+    <h3 th:if="${user != null}" th:text="'Spilari: ' + ${user.username}" />
+
+    <div th:if="${user == null}">
+      <a href="/login">Skrá inn</a>
+      <a href="/register">Nýskrá</a>
+    </div>
+
+    <div th:if="${user != null}">
+      <a href="/logout">Skrá út</a>
+      <a href="/courses">Sjá velli</a>
+    </div>
+ 
+</body>
+</html>
