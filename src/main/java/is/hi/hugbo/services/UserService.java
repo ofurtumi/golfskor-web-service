@@ -11,14 +11,14 @@ public class UserService implements IUserService {
   @Autowired
   UserRepository UR;
 
-  public User Register(String username, String password) {
+  public User register(String username, String password) {
     User newUser = new User(username, password);
     UR.save(newUser);
     return newUser;
   }
 
-  public User Login(String username, String password) {
-    if (UserExists(username)) {
+  public User login(String username, String password) {
+    if (userExists(username)) {
 
       User user = UR.findByUsername(username);
       if (user.getPassword().equals(password)) {
@@ -28,11 +28,7 @@ public class UserService implements IUserService {
     return null;
   }
 
-  public boolean Logout() {
-    return false;
-  }
-
-  public boolean UserExists(String username) {
+  public boolean userExists(String username) {
     return UR.existsByUsername(username);
   }
 

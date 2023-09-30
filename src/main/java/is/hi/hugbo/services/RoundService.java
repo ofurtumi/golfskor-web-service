@@ -16,8 +16,18 @@ public class RoundService implements IRoundService {
   @Autowired
   RoundRepository RR;
 
-  public Round save(User user, Course course, int[] holes) {
-    Round newRound = new Round(course, user, holes);
+  @Autowired
+  UserService US;
+
+  @Autowired
+  CourseService CS;
+
+  public Round save(String username, Long courseId, int[] holes) {
+
+    Round newRound = new Round(
+        CS.findById(courseId),
+        US.findUser(username),
+        holes);
     RR.save(newRound);
     return newRound;
   }
@@ -27,14 +37,4 @@ public class RoundService implements IRoundService {
     RR.save(round);
     return round;
   }
-
-  public List<Round> findByCourse(Long courseId) {
-    throw new UnsupportedOperationException("Unimplemented method 'findByCourse'");
-  }
-
-  public List<Round> findByUser(Long userId) {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'findByUser'");
-  }
-
 }
