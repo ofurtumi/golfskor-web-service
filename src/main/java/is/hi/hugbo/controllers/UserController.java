@@ -2,6 +2,7 @@ package is.hi.hugbo.controllers;
 
 import is.hi.hugbo.services.UserService;
 import jakarta.servlet.http.HttpSession;
+import is.hi.hugbo.interfaces.IUserController;
 import is.hi.hugbo.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class UserController {
+public class UserController implements IUserController {
   UserService userService;
   String error = "";
 
@@ -20,7 +21,11 @@ public class UserController {
   }
 
   @GetMapping("/register")
-  public String registerGET(Model model) {
+  public String getRegister(Model model, HttpSession session) {
+    if (session.getAttribute("user") != null) {
+      return "redirect:/";
+    }
+
     model.addAttribute("user", new User());
     model.addAttribute("error", error);
     error = "";
@@ -28,10 +33,10 @@ public class UserController {
   }
 
   @PostMapping("/register")
-  public String registerUser(
+  public String postRegister(
       @ModelAttribute User user,
       Model model) {
-    if (userService.UserExists(user.getUsername())) {
+    if (userService.userExists(user.getUsername())) {
       System.out.println("error: User exists");
       error = "Username already exists";
       return "redirect:/register";
@@ -49,23 +54,27 @@ public class UserController {
       error = "User already exists";
       return "redirect:/register";
     }
-    userService.Register(user.getUsername(), user.getPassword());
+    userService.register(user.getUsername(), user.getPassword());
     return "redirect:/login";
   }
 
-  @RequestMapping(value = "/login", method = RequestMethod.GET)
-  public String loginGET(User user) {
+  @GetMapping("/login")
+  public String getLogin(User user, HttpSession session) {
+    if (session.getAttribute("user") != null) {
+      return "redirect:/";
+    }
+
     return "login";
   }
 
   @PostMapping("/login")
-  public String loginUser(User user, HttpSession session, Model model) {
-    if (!userService.UserExists(user.getUsername())) {
+  public String postLogin(User user, HttpSession session, Model model) {
+    if (!userService.userExists(user.getUsername())) {
       model.addAttribute("error", "Username does not exist");
       return "redirect:/login";
     }
 
-    User loginuser = userService.Login(user.getUsername(), user.getPassword());
+    User loginuser = userService.login(user.getUsername(), user.getPassword());
     if (loginuser == null) {
       model.addAttribute("error", "Wrong username or password");
       return "redirect:/login";
@@ -76,7 +85,7 @@ public class UserController {
   }
 
   @GetMapping("/logout")
-  public String logoutUser(HttpSession session, Model model) {
+  public String getLogout(HttpSession session) {
     session.invalidate();
     return "redirect:/";
   }

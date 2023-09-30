@@ -8,27 +8,32 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import is.hi.hugbo.interfaces.ICourseController;
 import is.hi.hugbo.model.Course;
-import is.hi.hugbo.model.Round;
+import is.hi.hugbo.model.Holes;
 import is.hi.hugbo.services.CourseService;
 import is.hi.hugbo.services.RoundService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class CoursesController {
+public class CourseController implements ICourseController {
   RoundService roundService;
   CourseService courseService;
 
   @Autowired
-  public CoursesController(RoundService roundService, CourseService courseService) {
+  public CourseController(RoundService roundService, CourseService courseService) {
     this.roundService = roundService;
     this.courseService = courseService;
   }
 
   @GetMapping("/courses")
-  public String courses(Model model) {
+  public String getCourses(Model model, HttpSession session) {
+    String username = (String) session.getAttribute("user");
+    if (username != null) {
+      model.addAttribute("user", username);
+    }
     List<Course> courses = courseService.findAll();
     model.addAttribute("courses", courses);
 
@@ -37,7 +42,7 @@ public class CoursesController {
 
   @GetMapping("/round/{id}")
   public String getRoundForm(
-      @ModelAttribute Round round,
+      @ModelAttribute Holes holes,
       Model model,
       HttpSession session,
       @PathVariable("id") long courseId) {
@@ -46,14 +51,13 @@ public class CoursesController {
     if (username == null) {
       return "redirect:/login";
     }
-    Course course = courseService.findById(courseId);
-    model.addAttribute("current_course", course);
+    model.addAttribute("course_id", courseId);
     return "round";
   }
 
-  @PutMapping("/round/{id}")
+  @PostMapping("/round/{id}")
   public String postRoundForm(
-      @ModelAttribute Round round,
+      @ModelAttribute Holes holes,
       Model model,
       HttpSession session,
       @PathVariable("id") long courseId) {
@@ -61,8 +65,7 @@ public class CoursesController {
     if (username == null) {
       return "redirect:/login";
     }
-    Course course = (Course) session.getAttribute("current_course");
-    roundService.save(course, username, round.getHoles());
-    return "round";
+    roundService.save(username, courseId, holes.getHoles());
+    return "redirect:/courses";
   }
 }
