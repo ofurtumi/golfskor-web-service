@@ -3,11 +3,39 @@ package is.hi.hugbo.interfaces;
 import is.hi.hugbo.model.User;
 
 public interface IUserService {
-  public User Login(String username, String password);
+  /**
+   * Method to log in a user
+   * 
+   * @todo - Encrypt/decrypt password using BCrypt
+   * @param username - The username of the user
+   * @param password - The password of the user
+   * @return The logged in user
+   */
+  public User login(String username, String password);
 
-  public boolean Logout();
+  /**
+   * Method to create a user on the database
+   * 
+   * @todo - Encrypt password using BCrypt
+   * @param username - The username of the user
+   * @param password - The password of the user
+   * @return The newly created user
+   */
+  public User register(String username, String password);
 
-  public User Register(String username, String password);
+  /**
+   * Simple method to check if a user exists on the database
+   * 
+   * @param username - The username to check
+   * @return true if user exists, false otherwise
+   */
+  public boolean userExists(String username);
 
-  public boolean UserExists(String username);
+  /**
+   * Searches for a user on the database
+   * 
+   * @param username - The username to search for
+   * @return The user if found, null otherwise
+   */
+  public User findUser(String username);
 }
