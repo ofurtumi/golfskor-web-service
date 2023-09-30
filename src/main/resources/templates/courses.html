@@ -9,7 +9,7 @@
     <a th:href="'courses/' + ${course.id}" >
       <td th:text="${course.courseName}" />
     </a>
-    <a th:if="${user != null}" th:href="'round/ + '${course.id}">Skrá hring</a>
+    <a th:if="${user != null}" th:href="'round/' + ${course.id}">Skrá hring</a>
 
     <ul th:each="round: ${course.rounds}">
       <li>
