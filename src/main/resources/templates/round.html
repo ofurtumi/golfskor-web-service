@@ -4,9 +4,18 @@
     <title>Signup</title>
 </head>
 <body>
-  <h2>Signup for an account</h2>
-    <form action="#" th:action="@{/round/${current_course.id}}" th:object="${user}"  method="post">
-      <input type="submit" value="Sign up"/>
+  <h2>Skrá hring</h2>
+    <form action="#" th:action="@{/round/} + ${course_id}" th:object="${holes}"  method="post">
+      <input typse="number" name="score" id="score" th:field="*{hole1}"/>
+      <input typse="number" name="score" id="score" th:field="*{hole2}"/>
+      <input typse="number" name="score" id="score" th:field="*{hole3}"/>
+      <input typse="number" name="score" id="score" th:field="*{hole4}"/>
+      <input typse="number" name="score" id="score" th:field="*{hole5}"/>
+      <input typse="number" name="score" id="score" th:field="*{hole6}"/>
+      <input typse="number" name="score" id="score" th:field="*{hole7}"/>
+      <input typse="number" name="score" id="score" th:field="*{hole8}"/>
+      <input typse="number" name="score" id="score" th:field="*{hole9}"/>
+      <input type="submit" value="Skrá skor"/>
   </form>
   <p th:text="${error}" />
 </body>

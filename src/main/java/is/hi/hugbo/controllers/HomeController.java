@@ -5,12 +5,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import is.hi.hugbo.interfaces.IHomeController;
 import is.hi.hugbo.model.User;
 import is.hi.hugbo.services.UserService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class HomeController {
+public class HomeController implements IHomeController {
   private UserService userService;
 
   @Autowired

@@ -17,18 +17,23 @@ Til að geta keyrt verkefnið upp þarf maven að vera sett upp á vélinni, hæ
 
 Til að keyra upp verkefnið þarf að keyra `mvn spring-boot:run` í rót verkefnisins. Verkefnið er aðgengilegt á `localhost:8080` eftir að það hefur keyrt upp.
 
-## Endapunktar
+### Umhverfi
 
-> í augnablikinu eru allir endapunktar undir `/api/players` en líklegt að það breytist á næstunni
+Í augnablikinu hefur verkefnið verið keyrt upp á eftirfarandi umhverfum:
+|Stýrikerfi|Java version|Maven version|Postgres version|
+|:---|:---|:---|:---|
+|MacOs Ventura 13.2.1|20.0.2 2023-07-18|Apache 3.9.4|15.3 (Homebrew)|
 
-Hægt að sjá nánari docs um endapunkta [hér á postman docs](https://documenter.getpostman.com/view/20615550/2s9YCAQAKH)
-| Aðferð | Slóð | Lýsing |
-|:---|:---|:---|
-|`POST`|`/api/players` | býr til nýjan leikmann|
-|`GET`|`/api/players` | skilar öllum leikmönnum eða leikmanni með ákveðið nafn|
-|`GET`|`/api/players/active` | skilar öllum virkum/óvirkum leikmönnum|
-|`GET`|`/api/players/{id}` | skilar ákveðnum leikmanni|
-|`PUT`|`/api/players/{id}` | uppfærir ákveðinn leikmann|
-|`PUT`|`api/players/{id}/toggle` | uppfærir virkni ákveðins leikmanns|
-|`DELETE`|`/api/players/{id}` | eyðir ákveðnum leikmanni|
-|`DELETE`|`/api/players` | eyðir öllum leikmönnum|
+## Slóðir
+
+Hér má sjá allar núverandi slóðir sem eru í verkefninu.
+
+| Slóð          | Lýsing                                                           | Þarf login |
+| :------------ | :--------------------------------------------------------------- | :--------- |
+| `/`           | Forsíða, býður upp á að skrá sig inn eða nýskrá notanda          | Nei        |
+| `/`           | Forsíða, býður upp á að fá yfirlit yfir velli eða skrá út        | Já         |
+| `/register`   | Nýskráning notanda                                               | Nei        |
+| `/login`      | Innskráning notanda                                              | Nei        |
+| `/courses`    | Yfirlit yfir alla velli                                          | Nei        |
+| `/courses`    | Yfirlit yfir alla velli ásamt möguleika að skrá hring fyrir völl | Nei        |
+| `/round/{id}` | Hringskráning                                                    | Já         |
