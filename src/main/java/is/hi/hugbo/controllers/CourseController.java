@@ -52,6 +52,7 @@ public class CourseController implements ICourseController {
     if (user == null) {
       return "redirect:/login";
     }
+
     // TODO: take care of this inside thymeleaf template
     model.addAttribute("course_id", courseId);
     return "round";
@@ -67,6 +68,8 @@ public class CourseController implements ICourseController {
     if (user == null) {
       return "redirect:/login";
     }
+
+    // TODO: laga þetta cascade ves þannig hægt sé að setja user í round
     roundService.save(courseId, user.getUsername(), holes.getHoles());
     return "redirect:/courses";
   }
