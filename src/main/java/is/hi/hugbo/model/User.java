@@ -46,4 +46,11 @@ public class User {
   public String getPassword() {
     return password;
   }
+  public List<Round> getRounds() {
+    return rounds;
+  }
+
+  public void setRounds(List<Round> rounds) {
+    this.rounds = rounds;
+  }
 }

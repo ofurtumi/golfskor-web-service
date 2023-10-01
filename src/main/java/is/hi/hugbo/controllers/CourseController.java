@@ -33,7 +33,7 @@ public class CourseController implements ICourseController {
   public String getCourses(Model model, HttpSession session) {
     User user = (User) session.getAttribute("user");
     if (user != null) {
-      model.addAttribute("username", user.getUsername());
+      model.addAttribute("user", user);
     }
     List<Course> courses = courseService.findAll();
     model.addAttribute("courses", courses);

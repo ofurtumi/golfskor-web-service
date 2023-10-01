@@ -24,7 +24,7 @@ public class UserController implements IUserController {
   public String getHome(Model model, HttpSession session) {
     User user = (User) session.getAttribute("user");
     if (user != null) {
-      model.addAttribute("username", user.getUsername());
+      model.addAttribute("user", user);
     }
     return "home";
   }
