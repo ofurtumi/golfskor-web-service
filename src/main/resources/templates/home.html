@@ -21,20 +21,19 @@
         <h2 th:text="'Spilari: ' + ${user.username}" />
         <p>Gaman að sjá þig</p>
 
-        <div th:if="${user.rounds != null}">
+        <div th:if="${not #lists.isEmpty(rounds)}">
           <h3>Þínir leikir:</h3>
           <ul class="course_rounds">
-            <li class="container" th:each="round: ${user.rounds}">
+            <li class="course_container" th:each="round: ${rounds}">
               <ul class="round">
-                <li th:each="hole: ${round.holes}" th:text="${hole}" />
+                <li th:each="hole: ${round.getHoles()}" th:text="${hole}" />
               </ul>
-              <p th:text="${round.course.courseName}" />
+              <p th:text="${round.getCourse().getCourseName()}" />
             </li>
           </ul>
         </div>
-        <div th:if="${user.getRounds() == null}">
+        <div th:if="${#lists.isEmpty(rounds)}">
           <h3>Þú hefur ekki skráð neina leiki</h3>
-          <p>Þetta kemur alltaf? þarf að tékka á user.rounds</p>
         </div>
       </div>
     </main>
