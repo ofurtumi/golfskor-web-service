@@ -8,7 +8,7 @@
 
     <h1>GolfSkor</h1>
     <h2>Velkommen til GolfSkor</h2> 
-    <h3 th:if="${user != null}" th:text="'Spilari: ' + ${user.username}" />
+    <h3 th:if="${username != null}" th:text="'Spilari: ' + ${username}" />
 
     <div th:if="${user == null}">
       <a href="/login">Skrá inn</a>

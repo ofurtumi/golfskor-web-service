@@ -5,11 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import is.hi.hugbo.interfaces.ICourseService;
 import is.hi.hugbo.model.Course;
 import is.hi.hugbo.repositories.CourseRepository;
 
 @Service
-public class CourseService {
+public class CourseService implements ICourseService {
   @Autowired
   CourseRepository CR;
 
@@ -20,5 +21,4 @@ public class CourseService {
   public Course findById(long id) {
     return CR.findById(id);
   }
-
 }

@@ -1,12 +1,9 @@
 package is.hi.hugbo.services;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import is.hi.hugbo.interfaces.IRoundService;
-import is.hi.hugbo.model.Course;
 import is.hi.hugbo.model.Round;
 import is.hi.hugbo.model.User;
 import is.hi.hugbo.repositories.RoundRepository;
@@ -17,16 +14,13 @@ public class RoundService implements IRoundService {
   RoundRepository RR;
 
   @Autowired
-  UserService US;
-
-  @Autowired
   CourseService CS;
 
-  public Round save(String username, Long courseId, int[] holes) {
+  public Round save(Long courseId, User user, int[] holes) {
 
     Round newRound = new Round(
         CS.findById(courseId),
-        US.findUser(username),
+        user,
         holes);
     RR.save(newRound);
     return newRound;
@@ -36,5 +30,9 @@ public class RoundService implements IRoundService {
     round.setHoles(holes);
     RR.save(round);
     return round;
+  }
+
+  public void delete(Round round) {
+    RR.delete(round);
   }
 }

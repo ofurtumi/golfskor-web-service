@@ -14,4 +14,6 @@ public interface RoundRepository extends JpaRepository<Round, Long> {
   List<Round> findByCourse(Course course);
 
   List<Round> findByUser(User user);
+
+  void delete(Round round);
 }

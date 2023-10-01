@@ -20,6 +20,15 @@ public class UserController implements IUserController {
     this.userService = userService;
   }
 
+  @GetMapping("/")
+  public String getHome(Model model, HttpSession session) {
+    User user = (User) session.getAttribute("user");
+    if (user != null) {
+      model.addAttribute("username", user.getUsername());
+    }
+    return "home";
+  }
+
   @GetMapping("/register")
   public String getRegister(Model model, HttpSession session) {
     if (session.getAttribute("user") != null) {
@@ -59,10 +68,14 @@ public class UserController implements IUserController {
   }
 
   @GetMapping("/login")
-  public String getLogin(User user, HttpSession session) {
+  public String getLogin(Model model, HttpSession session) {
     if (session.getAttribute("user") != null) {
       return "redirect:/";
     }
+
+    model.addAttribute("user", new User());
+    model.addAttribute("error", error);
+    error = "";
 
     return "login";
   }
@@ -79,8 +92,7 @@ public class UserController implements IUserController {
       model.addAttribute("error", "Wrong username or password");
       return "redirect:/login";
     }
-    session.setAttribute("user", user.getUsername());
-    model.addAttribute("user", user.getUsername());
+    session.setAttribute("user", user);
     return "redirect:/";
   }
 
