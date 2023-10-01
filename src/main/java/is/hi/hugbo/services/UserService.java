@@ -1,6 +1,7 @@
 package is.hi.hugbo.services;
 
 import is.hi.hugbo.interfaces.IUserService;
+import is.hi.hugbo.model.Round;
 import is.hi.hugbo.model.User;
 import is.hi.hugbo.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,11 @@ public class UserService implements IUserService {
   public User findUser(String username) {
     User user = UR.findByUsername(username);
     return user;
+  }
+
+  public void addRound(String username, Round round) {
+    User user = UR.findByUsername(username);
+    user.getRounds().add(round);
+    UR.save(user);
   }
 }
