@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import is.hi.hugbo.interfaces.ICourseController;
 import is.hi.hugbo.model.Course;
 import is.hi.hugbo.model.Holes;
+import is.hi.hugbo.model.User;
 import is.hi.hugbo.services.CourseService;
 import is.hi.hugbo.services.RoundService;
 import jakarta.servlet.http.HttpSession;
@@ -30,9 +31,9 @@ public class CourseController implements ICourseController {
 
   @GetMapping("/courses")
   public String getCourses(Model model, HttpSession session) {
-    String username = (String) session.getAttribute("user");
-    if (username != null) {
-      model.addAttribute("user", username);
+    User user = (User) session.getAttribute("user");
+    if (user != null) {
+      model.addAttribute("username", user.getUsername());
     }
     List<Course> courses = courseService.findAll();
     model.addAttribute("courses", courses);
@@ -47,8 +48,8 @@ public class CourseController implements ICourseController {
       HttpSession session,
       @PathVariable("id") long courseId) {
 
-    String username = (String) session.getAttribute("user");
-    if (username == null) {
+    User user = (User) session.getAttribute("user");
+    if (user == null) {
       return "redirect:/login";
     }
     model.addAttribute("course_id", courseId);
@@ -61,11 +62,11 @@ public class CourseController implements ICourseController {
       Model model,
       HttpSession session,
       @PathVariable("id") long courseId) {
-    String username = (String) session.getAttribute("user");
-    if (username == null) {
+    User user = (User) session.getAttribute("user");
+    if (user == null) {
       return "redirect:/login";
     }
-    roundService.save(username, courseId, holes.getHoles());
+    roundService.save(courseId, user, holes.getHoles());
     return "redirect:/courses";
   }
 }
