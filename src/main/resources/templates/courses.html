@@ -3,22 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>GolfSkor</title>
+    <link th:href="@{/styles.css}" rel="stylesheet" />
+    <link th:href="@{/courses.css}" rel="stylesheet" />
 </head>
 <body>
-<section th:each="course: ${courses}">
-    <a th:href="'courses/' + ${course.id}" >
-      <td th:text="${course.courseName}" />
-    </a>
-    <a th:if="${user != null}" th:href="'round/' + ${course.id}">Skrá hring</a>
+    <header th:replace="~{ header :: header }"/>
+    <main class="container">
+      <section class="course" th:each="course: ${courses}">
+          <h1 th:text="${course.courseName}" />
+          <a th:if="${user != null}" th:href="'round/' + ${course.id}"><h2>Skrá hring</h2></a>
 
-    <ul th:each="round: ${course.rounds}">
-      <li>
-          <p th:text="${round.user.username}" />
-          <ul th:each="hole: ${round.holes}">
-            <li th:text="${hole}" />
+          <h3>spilaðir hringir</h3>
+          <ul class="course_rounds">
+            <li class="course_container" th:each="round: ${course.rounds}">
+                <ul class="round">
+                  <li th:each="hole: ${round.holes}" th:text="${hole}" />
+                </ul>
+                <p th:text="${round.user.username}" />
+            </li>
           </ul>
-      </li>
-    </ul>
-</section>
+      </section>
+    </main>
 </body>
 </html>

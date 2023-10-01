@@ -2,14 +2,18 @@
 <head>
     <meta charset="UTF-8">
     <title>Signup</title>
+    <link th:href="@{/styles.css}" rel="stylesheet" />
 </head>
 <body>
-  <h2>Signup for an account</h2>
-  <form action="#" th:action="@{/register}" th:object="${user}"  method="post">
-      <input type="text" name="username" id="username" th:field="*{username}"/>
-      <input type="text" name="password" id="password" th:value="*{password}"/>
-      <input type="submit" value="Sign up"/>
-  </form>
-  <p th:text="${error}" />
+  <header th:replace="~{ header :: header }"/>
+  <main>
+    <h2>Signup for an account</h2>
+    <form action="#" th:action="@{/register}" th:object="${user}"  method="post">
+        <input type="text" name="username" id="username" th:field="*{username}"/>
+        <input type="text" name="password" id="password" th:value="*{password}"/>
+        <input type="submit" value="Sign up"/>
+    </form>
+    <p th:text="${error}" />
+  </main>
 </body>
 </html>

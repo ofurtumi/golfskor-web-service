@@ -17,7 +17,7 @@ public class User {
 
   private String password;
 
-  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "user")
   private List<Round> rounds;
 
   public User() {
@@ -53,6 +53,7 @@ public class User {
   }
 
   public List<Round> getRounds() {
+    System.out.println(rounds);
     return rounds;
   }
 

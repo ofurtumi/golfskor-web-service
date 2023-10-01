@@ -3,22 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>GolfSkor</title>
+    <link th:href="@{/styles.css}" rel="stylesheet" />
+    <link th:href="@{/courses.css}" rel="stylesheet" />
 </head>
 <body>
+    <header th:replace="~{ header :: header }"/>
+    <main>
+      <h1>GolfSkor</h1>
 
-    <h1>GolfSkor</h1>
-    <h2>Velkommen til GolfSkor</h2> 
-    <h3 th:if="${username != null}" th:text="'Spilari: ' + ${username}" />
+      <div th:if="${user == null}">
+        <h2>Velkommen til GolfSkor</h2> 
+        <p>Vinsamlegast <a href="/login">skráið ykkur inn</a> eða <a href="/register">nýskráið</a> til þess að halda áfram.</p>
+        <p>Ef þið bara <a href="/courses">skoða velli</a> þá er það ekkert mál.</p> 
+        </div>
 
-    <div th:if="${user == null}">
-      <a href="/login">Skrá inn</a>
-      <a href="/register">Nýskrá</a>
-    </div>
+      <div th:if="${user != null}">
+        <h2 th:text="'Spilari: ' + ${user.username}" />
+        <p>Gaman að sjá þig</p>
 
-    <div th:if="${user != null}">
-      <a href="/logout">Skrá út</a>
-      <a href="/courses">Sjá velli</a>
-    </div>
- 
+        <div th:if="${user.rounds != null}">
+          <h3>Þínir leikir:</h3>
+          <ul class="course_rounds">
+            <li class="container" th:each="round: ${user.rounds}">
+              <ul class="round">
+                <li th:each="hole: ${round.holes}" th:text="${hole}" />
+              </ul>
+              <p th:text="${round.course.courseName}" />
+            </li>
+          </ul>
+        </div>
+        <div th:if="${user.getRounds() == null}">
+          <h3>Þú hefur ekki skráð neina leiki</h3>
+          <p>Þetta kemur alltaf? þarf að tékka á user.rounds</p>
+        </div>
+      </div>
+    </main>
 </body>
 </html>
