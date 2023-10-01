@@ -12,7 +12,7 @@ public class Round {
   @ManyToOne()
   private Course course;
 
-  @ManyToOne()
+  @ManyToOne
   private User user;
 
   private int[] holes;

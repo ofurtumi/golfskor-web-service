@@ -67,7 +67,7 @@ public class CourseController implements ICourseController {
     if (user == null) {
       return "redirect:/login";
     }
-    roundService.save(courseId, user, holes.getHoles());
+    roundService.save(courseId, user.getUsername(), holes.getHoles());
     return "redirect:/courses";
   }
 }

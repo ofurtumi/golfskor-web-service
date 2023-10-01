@@ -1,5 +1,7 @@
 package is.hi.hugbo.model;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -14,6 +16,9 @@ public class User {
   private String username;
 
   private String password;
+
+  @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<Round> rounds;
 
   public User() {
   }
@@ -46,6 +51,7 @@ public class User {
   public String getPassword() {
     return password;
   }
+
   public List<Round> getRounds() {
     return rounds;
   }
