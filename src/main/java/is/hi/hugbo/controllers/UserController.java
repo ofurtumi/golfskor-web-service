@@ -25,6 +25,7 @@ public class UserController implements IUserController {
     User user = (User) session.getAttribute("user");
     if (user != null) {
       model.addAttribute("user", user);
+      model.addAttribute("rounds", user.getRounds());
     }
     return "home";
   }
@@ -87,12 +88,13 @@ public class UserController implements IUserController {
       return "redirect:/login";
     }
 
-    User loginuser = userService.login(user.getUsername(), user.getPassword());
-    if (loginuser == null) {
+    User loginUser = userService.login(user.getUsername(), user.getPassword());
+    if (loginUser == null) {
       model.addAttribute("error", "Wrong username or password");
       return "redirect:/login";
     }
-    session.setAttribute("user", user);
+
+    session.setAttribute("user", loginUser);
     return "redirect:/";
   }
 

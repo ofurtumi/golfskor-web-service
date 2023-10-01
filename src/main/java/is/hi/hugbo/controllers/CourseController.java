@@ -16,17 +16,20 @@ import is.hi.hugbo.model.Holes;
 import is.hi.hugbo.model.User;
 import is.hi.hugbo.services.CourseService;
 import is.hi.hugbo.services.RoundService;
+import is.hi.hugbo.services.UserService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class CourseController implements ICourseController {
   RoundService roundService;
   CourseService courseService;
+  UserService userService;
 
   @Autowired
-  public CourseController(RoundService roundService, CourseService courseService) {
+  public CourseController(RoundService roundService, CourseService courseService, UserService userService) {
     this.roundService = roundService;
     this.courseService = courseService;
+    this.userService = userService;
   }
 
   @GetMapping("/courses")
@@ -71,6 +74,7 @@ public class CourseController implements ICourseController {
 
     // TODO: laga þetta cascade ves þannig hægt sé að setja user í round
     roundService.save(courseId, user.getUsername(), holes.getHoles());
+    session.setAttribute("user", userService.findUser(user.getUsername()));
     return "redirect:/courses";
   }
 }

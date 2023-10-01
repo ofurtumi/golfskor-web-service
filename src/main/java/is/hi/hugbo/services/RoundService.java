@@ -28,6 +28,7 @@ public class RoundService implements IRoundService {
         CS.findById(courseId),
         US.findUser(username),
         holes);
+    US.addRound(username, newRound);
     RR.save(newRound);
     return newRound;
   }

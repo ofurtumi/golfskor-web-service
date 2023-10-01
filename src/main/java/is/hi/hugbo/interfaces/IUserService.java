@@ -1,5 +1,6 @@
 package is.hi.hugbo.interfaces;
 
+import is.hi.hugbo.model.Round;
 import is.hi.hugbo.model.User;
 
 public interface IUserService {
@@ -38,4 +39,12 @@ public interface IUserService {
    * @return The user if found, null otherwise
    */
   public User findUser(String username);
+
+  /**
+   * Method to save round to user, needed for one to many relationship
+   * 
+   * @param username - The username of the player
+   * @param round    - The round to add
+   */
+  public void addRound(String username, Round round);
 }
