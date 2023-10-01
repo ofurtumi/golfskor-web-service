@@ -52,6 +52,7 @@ public class CourseController implements ICourseController {
     if (user == null) {
       return "redirect:/login";
     }
+    // TODO: take care of this inside thymeleaf template
     model.addAttribute("course_id", courseId);
     return "round";
   }
