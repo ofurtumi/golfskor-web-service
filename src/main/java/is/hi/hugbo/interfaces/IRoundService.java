@@ -1,6 +1,7 @@
 package is.hi.hugbo.interfaces;
 
 import is.hi.hugbo.model.Round;
+import is.hi.hugbo.model.User;
 
 public interface IRoundService {
   /**
@@ -13,7 +14,7 @@ public interface IRoundService {
    * @param int[]    holes - The scores for each hole
    * @return Newly created round
    */
-  public Round save(String username, Long courseId, int[] holes);
+  public Round save(Long courseId, User user, int[] holes);
 
   /**
    * Takes a round and updates its holes
@@ -23,4 +24,11 @@ public interface IRoundService {
    * @return The updated round
    */
   public Round update(Round round, int[] holes);
+
+  /**
+   * Method to delete a round from the database
+   * 
+   * @param round - The round to delete
+   */
+  public void delete(Round round);
 }
