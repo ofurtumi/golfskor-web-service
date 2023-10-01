@@ -5,7 +5,15 @@ import is.hi.hugbo.model.User;
 
 public interface IRoundService {
   /**
-   * # Creates a new round and saves it to the database
+   * Searches the database for round with given id
+   *
+   * @param id - The id of the round to find
+   * @return The round with given id or null if not found
+   */
+  public Round findById(long id);
+
+  /**
+   * Creates a new round and saves it to the database
    * 
    * @param username - The username of the user who created the round,
    *                 taken from

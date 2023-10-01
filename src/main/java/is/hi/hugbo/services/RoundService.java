@@ -16,8 +16,11 @@ public class RoundService implements IRoundService {
   @Autowired
   CourseService CS;
 
-  public Round save(Long courseId, User user, int[] holes) {
+  public Round findById(long id) {
+    return RR.findById(id);
+  }
 
+  public Round save(Long courseId, User user, int[] holes) {
     Round newRound = new Round(
         CS.findById(courseId),
         user,
