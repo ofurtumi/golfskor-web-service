@@ -1,0 +1,85 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.course > a {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: center;
+  border: 1px solid black;
+  transition: background 0.2s;
+}
+
+.course > a:hover {
+  background: #aaaaaa;
+}
+
+.course h3 {
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  padding: 0.5rem 0;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.course_rounds {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  min-width: 260px;
+}
+
+.course_rounds p {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.course_rounds p::before {
+  content: "@"
+}
+
+.round {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px solid gray;
+  justify-content: space-evenly;
+}
+
+.round li:after{
+  font-size: 0.5rem;
+}
+
+.round li:nth-child(1):after {
+  content: "1";
+}
+
+.round li:nth-child(2):after {
+  content: "2";
+}
+
+.round li:nth-child(3):after {
+  content: "3";
+}
+
+.round li:nth-child(4):after {
+  content: "4";
+}
+.round li:nth-child(5):after {
+  content: "5";
+}
+.round li:nth-child(6):after {
+  content: "6";
+}
+.round li:nth-child(7):after {
+  content: "7";
+}
+.round li:nth-child(8):after {
+  content: "8";
+}
+.round li:nth-child(9):after {
+  content: "9";
+}

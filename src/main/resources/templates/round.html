@@ -2,9 +2,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Signup</title>
+    <link th:href="@{/styles.css}" rel="stylesheet" />
 </head>
 <body>
-  <h2>Skrá hring</h2>
+  <header th:replace="~{ header :: header }"/>
+  <main>
+    <h2>Skrá hring</h2>
     <form action="#" th:action="@{/round/} + ${course_id}" th:object="${holes}"  method="post">
       <input typse="number" name="score" id="score" th:field="*{hole1}"/>
       <input typse="number" name="score" id="score" th:field="*{hole2}"/>
@@ -16,7 +19,8 @@
       <input typse="number" name="score" id="score" th:field="*{hole8}"/>
       <input typse="number" name="score" id="score" th:field="*{hole9}"/>
       <input type="submit" value="Skrá skor"/>
-  </form>
-  <p th:text="${error}" />
+    </form>
+    <p th:text="${error}" />
+  </main>
 </body>
 </html>
