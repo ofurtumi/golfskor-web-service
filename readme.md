@@ -23,6 +23,8 @@ Til að keyra upp verkefnið þarf að keyra `mvn spring-boot:run` í rót verke
 |Stýrikerfi|Java version|Maven version|Postgres version|
 |:---|:---|:---|:---|
 |MacOs Ventura 13.2.1|20.0.2 2023-07-18|Apache 3.9.4|15.3 (Homebrew)|
+|:---|:---|:---|:---|
+|Windows 10|21 2023-09-19|Apache 3.9.4|15.1|
 
 ## Slóðir
 
