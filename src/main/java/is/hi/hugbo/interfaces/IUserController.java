@@ -8,6 +8,13 @@ import jakarta.servlet.http.HttpSession;
 
 public interface IUserController {
   /**
+   * Very simple get method for the home page
+   * 
+   * @return home.html
+   */
+  public String getHome(Model model, HttpSession session);
+
+  /**
    * Get method that returns the register page
    * 
    * @param model   - The model, will include empty user and possible errors
@@ -30,11 +37,11 @@ public interface IUserController {
   /**
    * Get method that returns the login page
    *
-   * @param user    - Empty user object
+   * @param model   - The model, will include empty user and possible errors
    * @param session - The session object, used to check if user is logged in
    * @return login.html or redirect:/ if user is logged in
    */
-  public String getLogin(User user, HttpSession session);
+  public String getLogin(Model model, HttpSession session);
 
   /**
    * Post method that logs in a user
