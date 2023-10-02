@@ -22,14 +22,14 @@ public class RoundService implements IRoundService {
     return RR.findById(id);
   }
 
-  public Round save(long courseId, String username, int[] holes) {
-    // TODO: nota frekar user frekar en usename
+  public Round save(long courseId, long userId, int[] holes) {
     Round newRound = new Round(
         CS.findById(courseId),
-        US.findUser(username),
+        US.findUser(userId),
         holes);
-    US.addRound(username, newRound);
     RR.save(newRound);
+    CS.addRound(courseId, newRound);
+    US.addRound(userId, newRound);
     return newRound;
   }
 

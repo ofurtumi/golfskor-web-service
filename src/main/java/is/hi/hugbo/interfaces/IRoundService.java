@@ -21,7 +21,7 @@ public interface IRoundService {
    * @param int[]    holes - The scores for each hole
    * @return Newly created round
    */
-  public Round save(long courseId, String username, int[] holes);
+  public Round save(long courseId, long userId, int[] holes);
 
   /**
    * Takes a round and updates its holes
