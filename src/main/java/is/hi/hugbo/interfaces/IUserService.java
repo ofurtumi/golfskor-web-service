@@ -41,10 +41,18 @@ public interface IUserService {
   public User findUser(String username);
 
   /**
+   * Searches for a user on the database
+   * 
+   * @param userId - The user id to search for
+   * @return The user if found, null otherwise
+   */
+  public User findUser(long userId);
+
+  /**
    * Method to save round to user, needed for one to many relationship
    * 
    * @param username - The username of the player
    * @param round    - The round to add
    */
-  public void addRound(String username, Round round);
+  public void addRound(long userId, Round round);
 }

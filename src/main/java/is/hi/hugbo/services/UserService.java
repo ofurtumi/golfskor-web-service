@@ -38,8 +38,13 @@ public class UserService implements IUserService {
     return user;
   }
 
-  public void addRound(String username, Round round) {
-    User user = UR.findByUsername(username);
+  public User findUser(long userId) {
+    User user = UR.findById(userId).get();
+    return user;
+  }
+
+  public void addRound(long userId, Round round) {
+    User user = UR.findById(userId).get();
     user.getRounds().add(round);
     UR.save(user);
   }

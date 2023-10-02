@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import is.hi.hugbo.interfaces.ICourseService;
 import is.hi.hugbo.model.Course;
+import is.hi.hugbo.model.Round;
 import is.hi.hugbo.repositories.CourseRepository;
 
 @Service
@@ -20,5 +21,11 @@ public class CourseService implements ICourseService {
 
   public Course findById(long id) {
     return CR.findById(id);
+  }
+
+  public void addRound(long courseId, Round round) {
+    Course course = CR.findById(courseId);
+    course.getRounds().add(round);
+    CR.save(course);
   }
 }

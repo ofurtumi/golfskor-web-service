@@ -73,7 +73,7 @@ public class CourseController implements ICourseController {
     }
 
     // TODO: laga þetta cascade ves þannig hægt sé að setja user í round
-    roundService.save(courseId, user.getUsername(), holes.getHoles());
+    roundService.save(courseId, user.getId(), holes.getHoles());
     session.setAttribute("user", userService.findUser(user.getUsername()));
     return "redirect:/courses";
   }
