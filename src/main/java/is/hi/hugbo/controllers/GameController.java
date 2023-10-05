@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import is.hi.hugbo.interfaces.ICourseController;
+import is.hi.hugbo.interfaces.IGameController;
 import is.hi.hugbo.model.Course;
 import is.hi.hugbo.model.Holes;
 import is.hi.hugbo.model.User;
@@ -20,13 +20,13 @@ import is.hi.hugbo.services.UserService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class CourseController implements ICourseController {
+public class GameController implements IGameController {
   RoundService roundService;
   CourseService courseService;
   UserService userService;
 
   @Autowired
-  public CourseController(RoundService roundService, CourseService courseService, UserService userService) {
+  public GameController(RoundService roundService, CourseService courseService, UserService userService) {
     this.roundService = roundService;
     this.courseService = courseService;
     this.userService = userService;

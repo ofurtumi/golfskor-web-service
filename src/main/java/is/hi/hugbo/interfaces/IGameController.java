@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import is.hi.hugbo.model.Holes;
 import jakarta.servlet.http.HttpSession;
 
-public interface ICourseController {
+public interface IGameController {
   /**
    * GET method for all courses
    *
