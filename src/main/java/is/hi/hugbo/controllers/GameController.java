@@ -20,13 +20,13 @@ import is.hi.hugbo.services.UserService;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
-public class CourseController implements ICourseController {
+public class GameController implements ICourseController {
   RoundService roundService;
   CourseService courseService;
   UserService userService;
 
   @Autowired
-  public CourseController(RoundService roundService, CourseService courseService, UserService userService) {
+  public GameController(RoundService roundService, CourseService courseService, UserService userService) {
     this.roundService = roundService;
     this.courseService = courseService;
     this.userService = userService;
