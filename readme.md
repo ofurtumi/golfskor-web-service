@@ -24,6 +24,8 @@ Til að keyra upp verkefnið þarf að keyra `mvn spring-boot:run` í rót verke
 |:---|:---|:---|:---|
 |MacOs Ventura 13.2.1|20.0.2 2023-07-18|Apache 3.9.4|15.3 (Homebrew)|
 |Windows 10|21 2023-09-19|Apache 3.9.4|15.1|
+|Fedora Linux |21 2023-09-19 |Apache Maven 3.8.6 (Red Hat 3.8.6-4)|15.4|
+ 
 
 ## Slóðir
 
