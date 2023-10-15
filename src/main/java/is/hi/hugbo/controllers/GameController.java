@@ -88,10 +88,9 @@ public class GameController implements IGameController {
     User user = (User) session.getAttribute("user");
     if (roundToDelete != null){
       roundService.delete(roundToDelete);
-
-		  return "redirect:/";
+    	session.setAttribute("user", userService.findUser(user.getUsername()));
+	return "redirect:/";
     }
-    session.setAttribute("user", userService.findUser(user.getUsername()));
     return "redirect:/";
 	}
 }
