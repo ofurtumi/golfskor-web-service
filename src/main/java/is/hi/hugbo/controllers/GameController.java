@@ -5,15 +5,18 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import is.hi.hugbo.interfaces.IGameController;
 import is.hi.hugbo.model.Course;
 import is.hi.hugbo.model.Holes;
 import is.hi.hugbo.model.User;
+import is.hi.hugbo.model.Round;
 import is.hi.hugbo.services.CourseService;
 import is.hi.hugbo.services.RoundService;
 import is.hi.hugbo.services.UserService;
@@ -77,4 +80,20 @@ public class GameController implements IGameController {
     session.setAttribute("user", userService.findUser(user.getUsername()));
     return "redirect:/courses";
   }
+
+  @GetMapping("/round/delete/{id}")
+	public String deleteRound(
+    @ModelAttribute Holes holes,
+    Model model,
+    HttpSession session,
+    @PathVariable("id") long roundId) {
+    Round roundToDelete = roundService.findById(roundId);
+    if (roundToDelete != null){
+      roundService.delete(roundToDelete);
+		  return "redirect:/";
+    }
+    return "redirect:/";
+	}
+
+
 }
