@@ -48,4 +48,10 @@ public class UserService implements IUserService {
     user.getRounds().add(round);
     UR.save(user);
   }
+
+  public void removeRound(Round round) {
+    User user = round.getUser();
+    user.getRounds().remove(round);
+    UR.save(user);
+  }
 }

@@ -41,5 +41,6 @@ public class RoundService implements IRoundService {
 
   public void delete(Round round) {
     RR.delete(round);
+    US.removeRound(round);
   }
 }
