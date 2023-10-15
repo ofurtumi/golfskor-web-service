@@ -81,16 +81,15 @@ public class GameController implements IGameController {
   }
 
   @GetMapping("/round/delete/{id}")
-	public String deleteRound(
-    HttpSession session,
-    @PathVariable("id") long roundId) {
+  public String deleteRound(
+      HttpSession session,
+      @PathVariable("id") long roundId) {
     Round roundToDelete = roundService.findById(roundId);
-    User user = (User) session.getAttribute("user");
-    if (roundToDelete != null){
+    if (roundToDelete != null) {
       roundService.delete(roundToDelete);
-    	session.setAttribute("user", userService.findUser(user.getUsername()));
-	return "redirect:/";
+      User user = (User) session.getAttribute("user");
+      session.setAttribute("user", userService.findUser(user.getUsername()));
     }
     return "redirect:/";
-	}
+  }
 }

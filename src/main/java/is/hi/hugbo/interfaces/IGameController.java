@@ -47,4 +47,15 @@ public interface IGameController {
       Model model,
       HttpSession session,
       @PathVariable("id") long courseId);
+
+  /**
+   * Get method to delete a round
+   * 
+   * @param session - The session object
+   * @param roundId - The id of the round to delete
+   * @return redirect:/
+   */
+  public String deleteRound(
+      HttpSession session,
+      @PathVariable("id") long roundId);
 }
