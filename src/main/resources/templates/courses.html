@@ -14,8 +14,6 @@
           <a th:if="${user != null}" th:href="'round/' + ${course.id}"><h2>Skrá hring</h2></a>
 
           <h3>spilaðir hringir</h3>
-          <!--<form th:object="${round}" th:action="@{/round/delete/{id}} + ${round.id}" th:method="get">-->
-
           <ul class="course_rounds">
             <li class="course_container" th:each="round: ${course.rounds}">
                 <ul class="round">

@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -83,17 +82,16 @@ public class GameController implements IGameController {
 
   @GetMapping("/round/delete/{id}")
 	public String deleteRound(
-    @ModelAttribute Holes holes,
-    Model model,
     HttpSession session,
     @PathVariable("id") long roundId) {
     Round roundToDelete = roundService.findById(roundId);
+    User user = (User) session.getAttribute("user");
     if (roundToDelete != null){
       roundService.delete(roundToDelete);
+
 		  return "redirect:/";
     }
+    session.setAttribute("user", userService.findUser(user.getUsername()));
     return "redirect:/";
 	}
-
-
 }
