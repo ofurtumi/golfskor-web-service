@@ -9,11 +9,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import is.hi.hugbo.interfaces.IGameController;
 import is.hi.hugbo.model.Course;
 import is.hi.hugbo.model.Holes;
 import is.hi.hugbo.model.User;
+import is.hi.hugbo.model.Round;
 import is.hi.hugbo.services.CourseService;
 import is.hi.hugbo.services.RoundService;
 import is.hi.hugbo.services.UserService;
@@ -76,5 +78,18 @@ public class GameController implements IGameController {
     roundService.save(courseId, user.getId(), holes.getHoles());
     session.setAttribute("user", userService.findUser(user.getUsername()));
     return "redirect:/courses";
+  }
+
+  @GetMapping("/round/delete/{id}")
+  public String deleteRound(
+      HttpSession session,
+      @PathVariable("id") long roundId) {
+    Round roundToDelete = roundService.findById(roundId);
+    if (roundToDelete != null) {
+      roundService.delete(roundToDelete);
+      User user = (User) session.getAttribute("user");
+      session.setAttribute("user", userService.findUser(user.getUsername()));
+    }
+    return "redirect:/";
   }
 }

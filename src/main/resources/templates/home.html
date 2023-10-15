@@ -27,6 +27,7 @@
             <li class="course_container" th:each="round: ${rounds}">
               <ul class="round">
                 <li th:each="hole: ${round.getHoles()}" th:text="${hole}" />
+                <a th:if="${user != null}" th:href=" '/round/delete/' + ${round.id}" role="button">Eyða Hring</a>
               </ul>
               <p th:text="${round.getCourse().getCourseName()}" />
             </li>

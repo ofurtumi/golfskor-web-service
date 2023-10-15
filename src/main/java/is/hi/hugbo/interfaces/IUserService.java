@@ -55,4 +55,11 @@ public interface IUserService {
    * @param round    - The round to add
    */
   public void addRound(long userId, Round round);
+
+  /**
+   * Method to remove round from user, needed for one to many relationship
+   * 
+   * @param round - The round to remove
+   */
+  public void removeRound(Round round);
 }
