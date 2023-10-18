@@ -95,19 +95,21 @@ public class GameController implements IGameController {
   }
 
   // work in progress 
-  /* 
+  
   @GetMapping("/round/update/{id}")
-  public void updateRound(
+  public String updateRound(
     HttpSession session,
     @PathVariable("id") long roundId) {
       Round roundToUpdate = roundService.findById(roundId);
       if (roundToUpdate != null){
-        int[] 
-        roundService.update(roundToUpdate, null);
-        User user = (user) session.getAttribute("user");
+        int[] oldHoles = roundToUpdate.getHoles();
+        // need to send oldHoles to user to update and then take the updated holes and post them
+        int[] updatedHoles = new int[8]; // temporary, supposerd to pe updated holes
+        roundService.update(roundToUpdate, updatedHoles);
+        User user = (User) session.getAttribute("user");
         session.setAttribute("user", userService.findUser(user.getUsername()));
       }
-
+      return "redirect:/"; // return back to homepage
     }
-    */
+    
 }
