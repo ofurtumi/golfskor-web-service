@@ -8,19 +8,68 @@
   <header th:replace="~{ header :: header }"/>
   <main>
     <h2>Skrá hring</h2>
-    <form action="#" th:action="@{/round/} + ${course_id}" th:object="${holes}"  method="post">
-      <input typse="number" name="score" id="score" th:field="*{hole1}" required/>
-      <input typse="number" name="score" id="score" th:field="*{hole2}" required/>
-      <input typse="number" name="score" id="score" th:field="*{hole3}" required/>
-      <input typse="number" name="score" id="score" th:field="*{hole4}" required/>
-      <input typse="number" name="score" id="score" th:field="*{hole5}" required/>
-      <input typse="number" name="score" id="score" th:field="*{hole6}" required/>
-      <input typse="number" name="score" id="score" th:field="*{hole7}" required/>
-      <input typse="number" name="score" id="score" th:field="*{hole8}" required/>
-      <input typse="number" name="score" id="score" th:field="*{hole9}" required/>
+    <form action="#" th:action="@{/round/} + ${course_id}" th:object="${holes}"  method="post" id="18holes">
+      <input type="number" name="score" id="score" th:field="*{hole1}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole2}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole3}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole4}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole5}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole6}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole7}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole8}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole9}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole10}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole11}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole12}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole13}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole14}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole15}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole16}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole17}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole18}" required/>
       <input type="submit" value="Skrá skor"/>
+      <div>
+        <button type="button" id="toggle9" onclick="showNine()">Spila 9 holur</button>
+      </div>
+    </form>
+    <form action="#" th:action="@{/round/} + ${course_id}" th:object="${holes}"  method="post" id="9holes" style="display: none;">
+      <input type="number" name="score" id="score" th:field="*{hole1}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole2}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole3}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole4}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole5}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole6}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole7}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole8}" required/>
+      <input type="number" name="score" id="score" th:field="*{hole9}" required/>
+      <input type="submit" value="Skrá skor"/>
+      <div>
+        <button type="button" id="toggle18" onclick="showEighteen()">Spila 18 holur</button>
+      </div>
     </form>
     <p th:text="${error}" />
   </main>
 </body>
 </html>
+
+<script>
+  function showNine(){
+    let button9 = document.getElementById("toggle9");
+    let eighteenHoles = document.getElementById("18holes");
+    let nineHoles = document.getElementById("9holes");
+    if(button9.onclick){
+      eighteenHoles.style.display = "none";
+      nineHoles.style.display = "block";
+    }
+  }
+
+  function showEighteen(){
+    let button18 = document.getElementById("toggle18");
+    let nineHoles = document.getElementById("9holes");
+    let eighteenHoles = document.getElementById("18holes");
+    if(button18.onclick){
+      nineHoles.style.display = "none";
+      eighteenHoles.style.display = "block";
+    }
+  }
+</script>
