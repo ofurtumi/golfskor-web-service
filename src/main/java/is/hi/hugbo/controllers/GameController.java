@@ -20,6 +20,7 @@ import is.hi.hugbo.services.CourseService;
 import is.hi.hugbo.services.RoundService;
 import is.hi.hugbo.services.UserService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.transaction.Transactional;
 
 @Controller
 public class GameController implements IGameController {
@@ -92,4 +93,21 @@ public class GameController implements IGameController {
     }
     return "redirect:/";
   }
+
+  // work in progress 
+  /* 
+  @GetMapping("/round/update/{id}")
+  public void updateRound(
+    HttpSession session,
+    @PathVariable("id") long roundId) {
+      Round roundToUpdate = roundService.findById(roundId);
+      if (roundToUpdate != null){
+        int[] 
+        roundService.update(roundToUpdate, null);
+        User user = (user) session.getAttribute("user");
+        session.setAttribute("user", userService.findUser(user.getUsername()));
+      }
+
+    }
+    */
 }
