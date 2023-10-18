@@ -22,7 +22,7 @@
         <p>Gaman að sjá þig</p>
 
         <div th:if="${not #lists.isEmpty(rounds)}">
-          <h3>Þínir leikir:</h3>
+          <h3>Þínir hringir:</h3>
           <ul class="course_rounds">
             <li class="course_container" th:each="round: ${rounds}">
               <ul class="round">
@@ -34,7 +34,7 @@
           </ul>
         </div>
         <div th:if="${#lists.isEmpty(rounds)}">
-          <h3>Þú hefur ekki skráð neina leiki</h3>
+          <h3>Þú hefur ekki skráð neina hringi</h3>
         </div>
       </div>
     </main>

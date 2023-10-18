@@ -13,7 +13,7 @@
           <h1 th:text="${course.courseName}" />
           <a th:if="${user != null}" th:href="'round/' + ${course.id}"><h2>Skrá hring</h2></a>
 
-          <h3>spilaðir hringir</h3>
+          <h3>Spilaðir hringir</h3>
           <ul class="course_rounds">
             <li class="course_container" th:each="round: ${course.rounds}">
                 <ul class="round">
