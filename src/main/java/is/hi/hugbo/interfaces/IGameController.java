@@ -3,6 +3,7 @@ package is.hi.hugbo.interfaces;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import is.hi.hugbo.model.Holes;
 import jakarta.servlet.http.HttpSession;
@@ -31,7 +32,8 @@ public interface IGameController {
       @ModelAttribute Holes holes,
       Model model,
       HttpSession session,
-      @PathVariable("id") long courseId);
+      @PathVariable("id") long courseId,
+      @RequestParam(name = "holes", required = false) Integer numHoles);
 
   /**
    * Post method for round score form
