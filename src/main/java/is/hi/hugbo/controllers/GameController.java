@@ -61,7 +61,7 @@ public class GameController implements IGameController {
       return "redirect:/login";
     }
 
-    model.addAttribute("course_id", courseId);
+    model.addAttribute("endpoint", "/round/" + courseId);
     if (numHoles != null && numHoles == 9) {
       holes.setSize(9);
     }
@@ -101,6 +101,7 @@ public class GameController implements IGameController {
   @GetMapping("/round/update/{id}")
   public String updateRound(
       HttpSession session,
+      Model model,
       @ModelAttribute Holes holes,
       @PathVariable("id") long roundId,
       HttpServletRequest request) {
@@ -110,11 +111,30 @@ public class GameController implements IGameController {
     String sessionUsername = ((User) session.getAttribute("user")).getUsername();
 
     if (roundToUpdate != null && roundUsername.equals(sessionUsername)) {
+      model.addAttribute("endpoint", "/round/update/" + roundId);
       holes.setHoles(roundToUpdate.getHoles());
       return "round";
-
     }
     return "redirect:/"; // return back to homepage
   }
+  @PostMapping("/round/update/{id}")
+  public String postUpdateForm(
+      @ModelAttribute Holes holes,
+      Model model,
+      HttpSession session,
+      @PathVariable("id") long roundId) {
 
+    Round roundToUpdate = roundService.findById(roundId);
+    String roundUsername = roundToUpdate.getUser().getUsername();
+    String sessionUsername = ((User) session.getAttribute("user")).getUsername();
+
+    if (roundToUpdate == null || !roundUsername.equals(sessionUsername)) {
+      return "redirect:/login";
+    }
+
+    int[] holesToSave = holes.getHoles();
+    roundService.update(roundToUpdate,holesToSave);
+    session.setAttribute("user", userService.findUser(sessionUsername));
+    return "redirect:/home";
+  }
 }

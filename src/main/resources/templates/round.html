@@ -10,7 +10,7 @@
       <h2>Skrá hring</h2>
       <form
         action="#"
-        th:action="@{/round/} + ${course_id}"
+        th:action="${endpoint}"
         th:object="${holes}"
         method="post"
       >
