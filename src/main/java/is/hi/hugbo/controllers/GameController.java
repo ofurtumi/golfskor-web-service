@@ -94,26 +94,25 @@ public class GameController implements IGameController {
     return "redirect:/";
   }
 
-@GetMapping("/round/update/{id}")
-public String updateRound(
-    HttpSession session,
-    Model model,
-    @PathVariable("id") long roundId,
-    HttpServletRequest request) {
+  @GetMapping("/round/update/{id}")
+  public String updateRound(
+      HttpSession session,
+      Model model,
+      @PathVariable("id") long roundId,
+      HttpServletRequest request) {
 
     Round roundToUpdate = roundService.findById(roundId);
-    User roundUser = roundToUpdate.getUser();
-    User sessionUser = (User)session.getAttribute("user");
+    String roundUsername = roundToUpdate.getUser().getUsername();
+    String sessionUsername = ((User) session.getAttribute("user")).getUsername();
 
-    if (roundToUpdate != null && roundUser == sessionUser) {
-        Holes oldHoles = new Holes(roundToUpdate.getHoles());
-        // function to send the holes to users
-        model.addAttribute("holes", oldHoles);
-        return "round";
+    if (roundToUpdate != null && roundUsername.equals(sessionUsername)) {
+      Holes oldHoles = new Holes(roundToUpdate.getHoles());
+      // function to send the holes to users
+      model.addAttribute("holes", oldHoles);
+      return "round";
 
     }
     return "redirect:/"; // return back to homepage
-}
+  }
 
-    
 }
