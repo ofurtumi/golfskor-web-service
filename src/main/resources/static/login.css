@@ -46,3 +46,15 @@ form {
   align-items: center;
   gap: 0.5rem;
 }
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .inputs {
+    flex-direction: row;
+  }
+}
