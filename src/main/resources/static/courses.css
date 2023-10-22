@@ -4,8 +4,14 @@
   gap: 1rem;
 }
 
-.course > a {
-  margin: 0.5rem 0;
+.register {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: space-evenly;
+}
+
+.register > a {
   padding: 0.5rem;
   display: flex;
   justify-content: center;
@@ -13,7 +19,7 @@
   transition: background 0.2s;
 }
 
-.course > a:hover {
+.register > a:hover {
   background: #aaaaaa;
 }
 
@@ -38,7 +44,7 @@
 }
 
 .course_rounds p::before {
-  content: "@"
+  content: "@";
 }
 
 .round {
@@ -49,7 +55,7 @@
   justify-content: space-evenly;
 }
 
-.round li:after{
+.round li:after {
   font-size: 0.5rem;
 }
 

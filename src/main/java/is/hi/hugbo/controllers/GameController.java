@@ -1,5 +1,6 @@
 package is.hi.hugbo.controllers;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,15 +53,18 @@ public class GameController implements IGameController {
       @ModelAttribute Holes holes,
       Model model,
       HttpSession session,
-      @PathVariable("id") long courseId) {
+      @PathVariable("id") long courseId,
+      @RequestParam(name = "holes", required = false) Integer numHoles) {
 
     User user = (User) session.getAttribute("user");
     if (user == null) {
       return "redirect:/login";
     }
 
-    // TODO: take care of this inside thymeleaf template
     model.addAttribute("course_id", courseId);
+    if (numHoles != null && numHoles == 9) {
+      holes.setSize(9);
+    }
     return "round";
   }
 
@@ -75,8 +79,8 @@ public class GameController implements IGameController {
       return "redirect:/login";
     }
 
-    // TODO: laga þetta cascade ves þannig hægt sé að setja user í round
-    roundService.save(courseId, user.getId(), holes.getHoles());
+    int[] holesToSave = holes.getHoles();
+    roundService.save(courseId, user.getId(), holesToSave);
     session.setAttribute("user", userService.findUser(user.getUsername()));
     return "redirect:/courses";
   }
