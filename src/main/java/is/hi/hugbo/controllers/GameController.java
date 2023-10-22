@@ -19,8 +19,8 @@ import is.hi.hugbo.model.Round;
 import is.hi.hugbo.services.CourseService;
 import is.hi.hugbo.services.RoundService;
 import is.hi.hugbo.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
-import jakarta.transaction.Transactional;
 
 @Controller
 public class GameController implements IGameController {
@@ -94,22 +94,26 @@ public class GameController implements IGameController {
     return "redirect:/";
   }
 
-  // work in progress 
-  
-  @GetMapping("/round/update/{id}")
-  public String updateRound(
+@GetMapping("/round/update/{id}")
+public String updateRound(
     HttpSession session,
-    @PathVariable("id") long roundId) {
-      Round roundToUpdate = roundService.findById(roundId);
-      if (roundToUpdate != null){
-        int[] oldHoles = roundToUpdate.getHoles();
-        // need to send oldHoles to user to update and then take the updated holes and post them
-        int[] updatedHoles = new int[8]; // temporary, supposerd to pe updated holes
-        roundService.update(roundToUpdate, updatedHoles);
-        User user = (User) session.getAttribute("user");
-        session.setAttribute("user", userService.findUser(user.getUsername()));
-      }
-      return "redirect:/"; // return back to homepage
+    Model model,
+    @PathVariable("id") long roundId,
+    HttpServletRequest request) {
+
+    Round roundToUpdate = roundService.findById(roundId);
+    User roundUser = roundToUpdate.getUser();
+    User sessionUser = (User)session.getAttribute("user");
+
+    if (roundToUpdate != null && roundUser == sessionUser) {
+        Holes oldHoles = new Holes(roundToUpdate.getHoles());
+        // function to send the holes to users
+        model.addAttribute("holes", oldHoles);
+        return "round";
+
     }
+    return "redirect:/"; // return back to homepage
+}
+
     
 }

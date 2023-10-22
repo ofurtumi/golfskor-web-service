@@ -22,7 +22,29 @@ public class Holes {
 
   public Holes() {
   }
-
+  public Holes(int[] holes){
+    this.hole1 = holes[0];
+    this.hole2 = holes[1];
+    this.hole3 = holes[2];
+    this.hole4 = holes[3];
+    this.hole5 = holes[4];
+    this.hole6 = holes[5];
+    this.hole7 = holes[6];
+    this.hole8 = holes[7];
+    this.hole9 = holes[8];
+    if(holes.length > 9){
+      this.hole10 = holes[9];
+      this.hole11 = holes[10];
+      this.hole12 = holes[11];
+      this.hole13 = holes[12];
+      this.hole14 = holes[13];
+      this.hole15 = holes[14];
+      this.hole16 = holes[15];
+      this.hole17 = holes[16];
+      this.hole18 = holes[17];
+    
+    }
+  }
   public Holes(int hole1, int hole2, int hole3, int hole4, int hole5, int hole6, int hole7, int hole8, int hole9, 
   int hole10, int hole11, int hole12, int hole13, int hole14, int hole15, int hole16, int hole17, int hole18) {
     this.hole1 = hole1;

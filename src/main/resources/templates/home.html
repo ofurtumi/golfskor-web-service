@@ -28,6 +28,7 @@
               <ul class="round">
                 <li th:each="hole: ${round.getHoles()}" th:text="${hole}" />
                 <a th:if="${user != null}" th:href=" '/round/delete/' + ${round.id}" role="button">Eyða Hring</a>
+                <a th:if="${user != null}" th:href=" '/round/update/' + ${round.id}" role="button">Breyta Hring</a>
               </ul>
               <p th:text="${round.getCourse().getCourseName()}" />
             </li>
