@@ -37,8 +37,8 @@
   background-color: var(--background);
 }
 
-.round:not(:last-child) {
-  border-bottom: 1px solid var(--secondary);
+.round:not(.header) {
+  border-top: 1px solid var(--secondary);
 }
 
 .header {
