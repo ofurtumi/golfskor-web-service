@@ -9,6 +9,15 @@ public class Holes {
   public Holes() {
   }
 
+  public void setHoles(int[] holes) {
+    if (holes.length == 9) {
+      this.holeList = new ArrayList<Integer>(Collections.nCopies(9, 0));
+    }
+    for (int i = 0; i < holes.length; i++) {
+      this.holeList.set(i, holes[i]);
+    }
+  }
+
   public void setSize(int size) {
     this.holeList = new ArrayList<Integer>(Collections.nCopies(size, 0));
   }

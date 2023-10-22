@@ -101,7 +101,7 @@ public class GameController implements IGameController {
   @GetMapping("/round/update/{id}")
   public String updateRound(
       HttpSession session,
-      Model model,
+      @ModelAttribute Holes holes,
       @PathVariable("id") long roundId,
       HttpServletRequest request) {
 
@@ -110,9 +110,7 @@ public class GameController implements IGameController {
     String sessionUsername = ((User) session.getAttribute("user")).getUsername();
 
     if (roundToUpdate != null && roundUsername.equals(sessionUsername)) {
-      Holes oldHoles = new Holes(roundToUpdate.getHoles());
-      // function to send the holes to users
-      model.addAttribute("holes", oldHoles);
+      holes.setHoles(roundToUpdate.getHoles());
       return "round";
 
     }
