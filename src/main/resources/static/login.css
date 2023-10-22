@@ -1,0 +1,48 @@
+main {
+  width: fit-content;
+  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  border: 1px solid var(--secondary);
+  border-radius: 0.5rem;
+  box-shadow: 0 0 1.5rem -0.5rem var(--accent);
+}
+
+input {
+  border: 1px solid var(--secondary);
+  padding: 0.5rem;
+  background: none;
+  border-radius: 0.5rem;
+  transition: 0.15s;
+}
+
+input:focus {
+  outline: 1px solid var(--accent);
+}
+
+input[type="submit"] {
+  width: 50%;
+  cursor: pointer;
+  background-color: var(--secondary);
+  color: var(--primary);
+  border: 1px solid var(--secondary);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: 0.15s;
+}
+
+input[type="submit"]:hover,
+input[type="submit"]:focus {
+  background-color: var(--background);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}

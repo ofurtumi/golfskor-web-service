@@ -1,18 +1,32 @@
 <html xmlns:th="https://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Login</title>
     <link th:href="@{/styles.css}" rel="stylesheet" />
-</head>
-<body>
-  <header th:replace="~{ header :: header }"/>
-  <main>
-    <h1>Skráið ykkur inn</h1>
-    <form action="#" th:action="@{/login}" th:object="${user}"  method="post">
-        <input type="text" name="username" id="username" th:field="*{username}"/>
-        <input type="password" name="password" id="password" th:value="*{password}"/>
-        <input type="submit" value="Skrá inn"/>
-    </form>
-  </main>
-</body>
+    <link th:href="@{/login.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <header th:replace="~{ header :: header }" />
+    <main>
+      <h1>Skráið ykkur inn</h1>
+      <form action="#" th:action="@{/login}" th:object="${user}" method="post">
+        <div class="inputs">
+          <input
+            type="text"
+            name="username"
+            id="username"
+            th:field="*{username}"
+          />
+          <input
+            type="password"
+            name="password"
+            id="password"
+            th:value="*{password}"
+          />
+        </div>
+        <input type="submit" value="Skrá inn" />
+      </form>
+      <p th:text="${error}" />
+    </main>
+  </body>
 </html>

@@ -45,13 +45,21 @@ html {
   background-color: var(--background);
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  color: var(--primary);
+}
 h1 {
-  font-size: 3rem; /* 67.36px */
+  font-size: 2rem; /* 67.36px */
   font-weight: bold;
 }
 
 h2 {
-  font-size: 2rem; /* 50.56px */
+  font-size: 1.5rem; /* 50.56px */
   font-weight: bold;
 }
 
@@ -61,13 +69,13 @@ h3 {
 }
 
 h4 {
-  font-size: 1.2rem;
-  font-weight: normal;
+  font-size: 1.1rem;
+  font-weight: bold;
 }
 
 h5 {
-  font-size: 1.1rem;
-  font-weight: normal;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 small {
