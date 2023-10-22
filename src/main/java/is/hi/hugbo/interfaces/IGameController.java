@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import is.hi.hugbo.model.Holes;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 public interface IGameController {
@@ -58,6 +59,36 @@ public interface IGameController {
    * @return redirect:/
    */
   public String deleteRound(
+      HttpSession session,
+      @PathVariable("id") long roundId);
+
+  /**
+   * Get method to update a round
+   * 
+   * @param session - The session object
+   * @param model   - The model
+   * @param holes   - The hole object with the score
+   * @param roundId - The id of the round to update
+   * @param request - A request on the HTTP service
+   */
+  public String updateRound(
+      HttpSession session,
+      Model model,
+      @ModelAttribute Holes holes,
+      @PathVariable("id") long roundId);
+
+  /**
+   * Post method to update a round
+   * 
+   * @param holes   - The hole object with the scores
+   * @param model   - The model
+   * @param session - The session object
+   * @param roundId - The id of the round to update
+   * @return
+   */
+  public String postUpdateForm(
+      @ModelAttribute Holes holes,
+      Model model,
       HttpSession session,
       @PathVariable("id") long roundId);
 }

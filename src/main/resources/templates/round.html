@@ -10,7 +10,7 @@
       <h2>Skrá hring</h2>
       <form
         action="#"
-        th:action="@{/round/} + ${course_id}"
+        th:action="${endpoint}"
         th:object="${holes}"
         method="post"
       >
@@ -33,7 +33,9 @@
     // Set all input values to null on page load and prevents negative numbers
     const inputs = document.querySelectorAll("input[type=number]");
     inputs.forEach((input) => {
-      input.value = null;
+      if (input.value == 0) {
+        input.value = null;
+      }
       input.addEventListener("change", (e) => {
         if (e.target.value < 1) {
           e.target.value = 1;
