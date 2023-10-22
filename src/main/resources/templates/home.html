@@ -10,12 +10,12 @@
     <header th:replace="~{ header :: header }" />
     <main>
       <div class="hero" th:if="${user == null}">
-        <h2>Velkommen til GolfSkor</h2>
-        <p>
+        <h1>Velkommen til GolfSkor</h1>
+        <h2>
           Vinsamlegast <a href="/login">skráið ykkur inn</a> eða
           <a href="/register">nýskráið</a> til þess að halda áfram.
-        </p>
-        <p>Þið getið líka <a href="/courses">skoðað velli</a>.</p>
+        </h2>
+        <h3>Þið getið líka <a href="/courses">skoðað velli</a>.</h3>
       </div>
 
       <div th:if="${user != null}">
