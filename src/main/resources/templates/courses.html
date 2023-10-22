@@ -1,28 +1,37 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>GolfSkor</title>
     <link th:href="@{/styles.css}" rel="stylesheet" />
     <link th:href="@{/courses.css}" rel="stylesheet" />
-</head>
-<body>
-    <header th:replace="~{ header :: header }"/>
+  </head>
+  <body>
+    <header th:replace="~{ header :: header }" />
     <main class="container">
       <section class="course" th:each="course: ${courses}">
-          <h1 th:text="${course.courseName}" />
-          <a th:if="${user != null}" th:href="'round/' + ${course.id}"><h2>Skrá hring</h2></a>
+        <h1 th:text="${course.courseName}" />
+        <div class="register">
+          <a
+            th:if="${user != null}"
+            th:href="'round/' + ${course.id} + '?holes=9'"
+            ><h2>Skrá 9 holur</h2></a
+          >
+          <a th:if="${user != null}" th:href="'round/' + ${course.id}"
+            ><h2>Skrá 18 holur</h2></a
+          >
+        </div>
 
-          <h3>Spilaðir hringir</h3>
-          <ul class="course_rounds">
-            <li class="course_container" th:each="round: ${course.rounds}">
-                <ul class="round">
-                  <li th:each="hole: ${round.holes}" th:text="${hole}" />
-                </ul>
-                <p th:text="${round.user.username}" />
-            </li>
-          </ul>
+        <h3>Spilaðir hringir</h3>
+        <ul class="course_rounds">
+          <li class="course_container" th:each="round: ${course.rounds}">
+            <ul class="round">
+              <li th:each="hole: ${round.holes}" th:text="${hole}" />
+            </ul>
+            <p th:text="${round.user.username}" />
+          </li>
+        </ul>
       </section>
     </main>
-</body>
+  </body>
 </html>
