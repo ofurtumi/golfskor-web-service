@@ -103,8 +103,7 @@ public class GameController implements IGameController {
       HttpSession session,
       Model model,
       @ModelAttribute Holes holes,
-      @PathVariable("id") long roundId,
-      HttpServletRequest request) {
+      @PathVariable("id") long roundId) {
 
     Round roundToUpdate = roundService.findById(roundId);
     String roundUsername = roundToUpdate.getUser().getUsername();
@@ -117,6 +116,7 @@ public class GameController implements IGameController {
     }
     return "redirect:/"; // return back to homepage
   }
+
   @PostMapping("/round/update/{id}")
   public String postUpdateForm(
       @ModelAttribute Holes holes,
@@ -133,7 +133,7 @@ public class GameController implements IGameController {
     }
 
     int[] holesToSave = holes.getHoles();
-    roundService.update(roundToUpdate,holesToSave);
+    roundService.update(roundToUpdate, holesToSave);
     session.setAttribute("user", userService.findUser(sessionUsername));
     return "redirect:/";
   }
