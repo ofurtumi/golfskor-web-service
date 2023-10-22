@@ -1,6 +1,7 @@
 package is.hi.hugbo.controllers;
 
 import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import is.hi.hugbo.model.Round;
 import is.hi.hugbo.services.CourseService;
 import is.hi.hugbo.services.RoundService;
 import is.hi.hugbo.services.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
