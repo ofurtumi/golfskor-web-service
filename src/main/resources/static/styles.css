@@ -17,6 +17,14 @@
     --secondary: #302f32;
     --accent: #929b94;
   }
+
+  :root {
+    --text: #070708;
+    --background: #edecee;
+    --primary: #403c3b;
+    --secondary: #cecdd0;
+    --accent: #646d66;
+  }
 }
 
 * {
@@ -49,7 +57,7 @@ h2 {
 
 h3 {
   font-size: 1.25rem;
-  font-weight: normal;
+  font-weight: bold;
 }
 
 h4 {
@@ -59,7 +67,7 @@ h4 {
 
 h5 {
   font-size: 1.1rem;
-  font-weight: light;
+  font-weight: normal;
 }
 
 small {
@@ -75,7 +83,7 @@ main {
 header {
   width: 100%;
   display: flex;
-  border-bottom: 2px solid var(--accent);
+  border-bottom: 2px solid var(--secondary);
   margin-bottom: 2rem;
 }
 

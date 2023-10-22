@@ -1,5 +1,7 @@
 package is.hi.hugbo.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,10 @@ public class RoundService implements IRoundService {
 
   public Round findById(long id) {
     return RR.findById(id);
+  }
+
+  public List<Round> findAll() {
+    return RR.findAll();
   }
 
   public Round save(long courseId, long userId, int[] holes) {

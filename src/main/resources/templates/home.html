@@ -1,43 +1,67 @@
-<!DOCTYPE html>
+<!doctype html>
 <html xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>GolfSkor</title>
     <link th:href="@{/styles.css}" rel="stylesheet" />
-    <link th:href="@{/courses.css}" rel="stylesheet" />
-</head>
-<body>
-    <header th:replace="~{ header :: header }"/>
+    <link th:href="@{/home.css}" rel="stylesheet" />
+  </head>
+  <body>
+    <header th:replace="~{ header :: header }" />
     <main>
-      <h1>GolfSkor</h1>
-
-      <div th:if="${user == null}">
-        <h2>Velkommen til GolfSkor</h2> 
-        <p>Vinsamlegast <a href="/login">skráið ykkur inn</a> eða <a href="/register">nýskráið</a> til þess að halda áfram.</p>
-        <p>Ef þið bara <a href="/courses">skoða velli</a> þá er það ekkert mál.</p> 
-        </div>
+      <div class="hero" th:if="${user == null}">
+        <h2>Velkommen til GolfSkor</h2>
+        <p>
+          Vinsamlegast <a href="/login">skráið ykkur inn</a> eða
+          <a href="/register">nýskráið</a> til þess að halda áfram.
+        </p>
+        <p>Þið getið líka <a href="/courses">skoðað velli</a>.</p>
+      </div>
 
       <div th:if="${user != null}">
-        <h2 th:text="'Spilari: ' + ${user.username}" />
-        <p>Gaman að sjá þig</p>
+        <h2 class="hero" th:text="'Spilari: ' + ${user.username}" />
 
         <div th:if="${not #lists.isEmpty(rounds)}">
-          <h3>Þínir hringir:</h3>
-          <ul class="course_rounds">
-            <li class="course_container" th:each="round: ${rounds}">
-              <ul class="round">
-                <li th:each="hole: ${round.getHoles()}" th:text="${hole}" />
-                <a th:if="${user != null}" th:href=" '/round/delete/' + ${round.id}" role="button">Eyða Hring</a>
-                <a th:if="${user != null}" th:href=" '/round/update/' + ${round.id}" role="button">Breyta Hring</a>
-              </ul>
-              <p th:text="${round.getCourse().getCourseName()}" />
-            </li>
-          </ul>
+          <h2>Þínir hringir:</h2>
+          <section class="rounds">
+            <div class="round header">
+              <span>Völlur</span>
+              <span>Stig</span>
+              <span>Hringur</span>
+            </div>
+          </section>
+          <div class="round" th:each="round: ${user.rounds}">
+            <span th:text="${round.course.courseName}" />
+            <span th:text="${round.getScore()}" />
+            <ul class="holes">
+              <li th:each="hole: ${round.holes}" th:text="${hole}" />
+            </ul>
+            <a
+              th:if="${user != null}"
+              th:href=" '/round/delete/' + ${round.id}"
+              role="button"
+              >Eyða Hring</a
+            >
+            <a
+              th:if="${user != null}"
+              th:href=" '/round/update/' + ${round.id}"
+              role="button"
+              >Breyta Hring</a
+            >
+          </div>
+          <!-- <ul class="course_rounds"> -->
+          <!--   <li class="course_container" th:each="round: ${rounds}"> -->
+          <!--     <ul class="round"> -->
+          <!--       <li th:each="hole: ${round.getHoles()}" th:text="${hole}" /> -->
+          <!--     </ul> -->
+          <!--     <p th:text="${round.getCourse().getCourseName()}" /> -->
+          <!--   </li> -->
+          <!-- </ul> -->
         </div>
         <div th:if="${#lists.isEmpty(rounds)}">
           <h3>Þú hefur ekki skráð neina hringi</h3>
         </div>
       </div>
     </main>
-</body>
+  </body>
 </html>

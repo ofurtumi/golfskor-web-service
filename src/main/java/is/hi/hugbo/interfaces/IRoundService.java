@@ -1,5 +1,7 @@
 package is.hi.hugbo.interfaces;
 
+import java.util.List;
+
 import is.hi.hugbo.model.Round;
 
 public interface IRoundService {
@@ -10,6 +12,13 @@ public interface IRoundService {
    * @return The round with given id or null if not found
    */
   public Round findById(long id);
+
+  /**
+   * Searches the database for all rounds
+   * 
+   * @return List of all rounds
+   */
+  public List<Round> findAll();
 
   /**
    * Creates a new round and saves it to the database

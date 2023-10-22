@@ -13,39 +13,32 @@
 
       <section class="courses">
         <div class="course" th:each="course: ${courses}">
-          <div>
-            <h3 th:text="${course.courseName}" />
-            <!-- <p th:text="''Leikir spilaðir' + ${course.rounds.size()}" /> -->
-          </div>
-          <div class="register" th:if="${user != null}">
+          <h3 th:text="${course.courseName}" />
+          <p th:text="'Skráðir hringir: ' + ${course.rounds.size()}" />
+          <div class="registration" th:if="${user != null}">
             <a th:href="'round/' + ${course.id} + '?holes=9'">Skrá 9 holur</a>
             <a th:href="'round/' + ${course.id}">Skrá 18 holur</a>
           </div>
         </div>
       </section>
+      <h2>Hringir</h2>
+      <section class="rounds">
+        <div class="round header">
+          <span>Völlur</span>
+          <span>Spilari</span>
+          <span>Stig</span>
+          <span>Hringur</span>
+        </div>
+
+        <div class="round" th:each="round: ${rounds}">
+          <span th:text="${round.course.courseName}" />
+          <span th:text="${round.user.username}" />
+          <span th:text="${round.getScore()}" />
+          <ul class="holes">
+            <li th:each="hole: ${round.holes}" th:text="${hole}" />
+          </ul>
+        </div>
+      </section>
     </main>
-    <!-- <main class="container"> -->
-    <!--   <section class="course" th:each="course: ${courses}"> -->
-    <!--     <h1 th:text="${course.courseName}" /> -->
-    <!--     <div class="register"> -->
-    <!-- <a th:if="${user != null}" th:href="'round/' + ${course.id} + '?holes=9'" -->
-    <!--   ><h2>Skrá 9 holur</h2></a -->
-    <!-- > -->
-    <!-- <a th:if="${user != null}" th:href="'round/' + ${course.id}" -->
-    <!--   ><h2>Skrá 18 holur</h2></a -->
-    <!-- > -->
-    <!--     </div> -->
-    <!---->
-    <!--     <h3>Spilaðir hringir</h3> -->
-    <!--     <ul class="course_rounds"> -->
-    <!--       <li class="course_container" th:each="round: ${course.rounds}"> -->
-    <!--         <ul class="round"> -->
-    <!--           <li th:each="hole: ${round.holes}" th:text="${hole}" /> -->
-    <!--         </ul> -->
-    <!--         <p th:text="${round.user.username}" /> -->
-    <!--       </li> -->
-    <!--     </ul> -->
-    <!--   </section> -->
-    <!-- </main> -->
   </body>
 </html>

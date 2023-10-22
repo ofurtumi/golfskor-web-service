@@ -1,5 +1,7 @@
 package is.hi.hugbo.model;
 
+import java.util.Arrays;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -40,6 +42,10 @@ public class Round {
 
   public int[] getHoles() {
     return holes;
+  }
+
+  public int getScore() {
+    return Arrays.stream(holes).sum();
   }
 
   public void setHoles(int[] holes) {
