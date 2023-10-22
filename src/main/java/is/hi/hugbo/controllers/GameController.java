@@ -1,5 +1,6 @@
 package is.hi.hugbo.controllers;
 
+import java.util.Collections;
 import java.util.Arrays;
 import java.util.List;
 
@@ -43,7 +44,10 @@ public class GameController implements IGameController {
       model.addAttribute("user", user);
     }
     List<Course> courses = courseService.findAll();
+    List<Round> rounds = roundService.findAll();
+    Collections.reverse(rounds);
     model.addAttribute("courses", courses);
+    model.addAttribute("rounds", rounds);
 
     return "courses";
   }

@@ -1,9 +1,85 @@
+@import url("https://fonts.googleapis.com/css?family=Noto Sans Shavian:700|Noto Sans Shavian:400");
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --text: #070708;
+    --background: #edecee;
+    --primary: #403c3b;
+    --secondary: #cecdd0;
+    --accent: #646d66;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #f7f7f8;
+    --background: #121113;
+    --primary: #c4c0bf;
+    --secondary: #302f32;
+    --accent: #929b94;
+  }
+
+  :root {
+    --text: #070708;
+    --background: #edecee;
+    --primary: #403c3b;
+    --secondary: #cecdd0;
+    --accent: #646d66;
+  }
+}
+
 * {
   margin: 0;
   padding-inline-start: 0;
   list-style: none;
-  font-family: monospace;
-  box-sizing: border-box
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Noto Sans Shavian";
+  font-weight: 400;
+  color: var(--text);
+}
+
+html {
+  font-size: 100%;
+  background-color: var(--background);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+p {
+  color: var(--primary);
+}
+h1 {
+  font-size: 2rem; /* 67.36px */
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 1.5rem; /* 50.56px */
+  font-weight: bold;
+}
+
+h3 {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+h4 {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+h5 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+small {
+  font-size: 0.8rem;
 }
 
 main {
@@ -12,15 +88,10 @@ main {
   margin: 0 auto;
 }
 
-a {
-  color: black;
-  text-decoration: none;
-}
-
 header {
   width: 100%;
   display: flex;
-  border-bottom: 2px solid black;
+  border-bottom: 2px solid var(--secondary);
   margin-bottom: 2rem;
 }
 
@@ -40,11 +111,12 @@ nav ul li {
 }
 
 a {
-  color: black;
-  text-decoration: underline 1px white;
+  color: var(--text);
+  text-decoration: underline 1px var(--background);
   transition: 0.15s;
 }
 
-a:hover, a:focus {
-  text-decoration: underline 1px black;
+a:hover,
+a:focus {
+  text-decoration: underline 1px var(--accent);
 }
