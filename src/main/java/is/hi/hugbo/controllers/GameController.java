@@ -135,6 +135,6 @@ public class GameController implements IGameController {
     int[] holesToSave = holes.getHoles();
     roundService.update(roundToUpdate,holesToSave);
     session.setAttribute("user", userService.findUser(sessionUsername));
-    return "redirect:/home";
+    return "redirect:/";
   }
 }
