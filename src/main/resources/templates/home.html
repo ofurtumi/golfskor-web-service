@@ -19,7 +19,7 @@
       </div>
 
       <div th:if="${user != null}">
-        <h2 class="hero" th:text="'Spilari: ' + ${user.username}" />
+        <h1 class="hero" th:text="'Spilari: ' + ${user.username}" />
 
         <div th:if="${not #lists.isEmpty(rounds)}">
           <h2>Þínir hringir:</h2>
