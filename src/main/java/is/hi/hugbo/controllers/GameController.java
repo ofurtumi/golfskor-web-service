@@ -21,7 +21,6 @@ import is.hi.hugbo.model.Round;
 import is.hi.hugbo.services.CourseService;
 import is.hi.hugbo.services.RoundService;
 import is.hi.hugbo.services.UserService;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
