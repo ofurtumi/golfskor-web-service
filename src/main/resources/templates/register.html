@@ -1,3 +1,4 @@
+<!doctype html>
 <html xmlns:th="https://thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
@@ -31,7 +32,7 @@
         </div>
         <input type="submit" value="Nýskrá" />
       </form>
-      <p th:text="${error}" />
+      <p th:if="${error != null}" th:text="${error}" />
     </main>
   </body>
 </html>

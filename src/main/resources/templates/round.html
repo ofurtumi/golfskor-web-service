@@ -1,31 +1,37 @@
 <html xmlns:th="https://thymeleaf.org">
   <head>
     <meta charset="UTF-8" />
-    <title>Signup</title>
+    <title>Skrá hring</title>
     <link th:href="@{/styles.css}" rel="stylesheet" />
+    <link th:href="@{/round.css}" rel="stylesheet" />
   </head>
   <body>
     <header th:replace="~{ header :: header }" />
     <main>
-      <h2>Skrá hring</h2>
+      <h1>Skrá hring</h1>
       <form
         action="#"
         th:action="${endpoint}"
         th:object="${holes}"
         method="post"
       >
-        <div th:each="hole, index : *{holeList}">
-          <input
-            type="number"
-            th:field="*{holeList[__${index.index}__]}"
-            value=""
-            min="1"
-            required
-          />
+        <div class="holes">
+          <label th:each="hole, index : *{holeList}">
+            <span th:text="${index.index+1} + '.'" />
+            <input
+              type="number"
+              th:field="*{holeList[__${index.index}__]}"
+              th:id="'hole' + ${index.index + 1}"
+              placeholder="stig"
+              value=""
+              min="1"
+              required
+            />
+          </label>
         </div>
         <input type="submit" value="Skrá skor" />
       </form>
-      <p th:text="${error}" />
+      <p th:if="${error != null}" th:text="${error}" />
     </main>
   </body>
 
