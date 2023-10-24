@@ -37,7 +37,9 @@ public class UserController implements IUserController {
     }
 
     model.addAttribute("user", new User());
-    model.addAttribute("error", error);
+    if (error != "") {
+      model.addAttribute("error", error);
+    }
     error = "";
     return "register";
   }
@@ -75,7 +77,9 @@ public class UserController implements IUserController {
     }
 
     model.addAttribute("user", new User());
-    model.addAttribute("error", error);
+    if (error != "") {
+      model.addAttribute("error", error);
+    }
     error = "";
 
     return "login";
@@ -84,13 +88,13 @@ public class UserController implements IUserController {
   @PostMapping("/login")
   public String postLogin(User user, HttpSession session, Model model) {
     if (!userService.userExists(user.getUsername())) {
-      model.addAttribute("error", "Username does not exist");
+      error = "Username does not exist";
       return "redirect:/login";
     }
 
     User loginUser = userService.login(user.getUsername(), user.getPassword());
     if (loginUser == null) {
-      model.addAttribute("error", "Wrong username or password");
+      error = "Wrong username or password";
       return "redirect:/login";
     }
 
