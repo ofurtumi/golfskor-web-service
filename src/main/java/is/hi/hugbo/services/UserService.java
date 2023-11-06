@@ -4,7 +4,9 @@ import is.hi.hugbo.interfaces.IUserService;
 import is.hi.hugbo.model.Round;
 import is.hi.hugbo.model.User;
 import is.hi.hugbo.repositories.UserRepository;
+import is.hi.hugbo.security.PasswordEncoder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -12,17 +14,28 @@ public class UserService implements IUserService {
   @Autowired
   UserRepository UR;
 
-  public User register(String username, String password) {
-    User newUser = new User(username, password);
+  @Autowired
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+  public User register(String username, String password) { 
+    User newUser = new User();
+    newUser.setUsername(username);
+    newUser.setPassword(bCryptPasswordEncoder.encode(password));
     UR.save(newUser);
     return newUser;
   }
+  /*
+   * The matches method will compare the raw password with the encrypted one
+   */
+  private boolean checkPassword(User user, String rawPassword) {
+    return bCryptPasswordEncoder.matches(rawPassword, user.getPassword());
+}
 
   public User login(String username, String password) {
     if (userExists(username)) {
 
       User user = UR.findByUsername(username);
-      if (user.getPassword().equals(password)) {
+      if (user != null && checkPassword(user, password)) {
         return user;
       }
     }
