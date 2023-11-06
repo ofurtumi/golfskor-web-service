@@ -1,7 +1,6 @@
 package is.hi.hugbo.controllers;
 
 import java.util.Collections;
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,6 +53,7 @@ public class GameController implements IGameController {
   @GetMapping("/round/{id}")
   public String getRoundForm(
       @ModelAttribute Holes holes,
+      @ModelAttribute Course course,
       Model model,
       HttpSession session,
       @PathVariable("id") long courseId,
@@ -63,11 +63,16 @@ public class GameController implements IGameController {
     if (user == null) {
       return "redirect:/login";
     }
-
+    
     model.addAttribute("endpoint", "/round/" + courseId);
     if (numHoles != null && numHoles == 9) {
       holes.setSize(9);
     }
+
+    course = courseService.findById(courseId);
+    model.addAttribute("course", course); 
+    
+    
     return "round";
   }
 

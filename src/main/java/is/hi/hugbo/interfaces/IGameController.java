@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import is.hi.hugbo.model.Holes;
+import is.hi.hugbo.model.Course;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -31,6 +32,7 @@ public interface IGameController {
    */
   public String getRoundForm(
       @ModelAttribute Holes holes,
+      @ModelAttribute Course course,
       Model model,
       HttpSession session,
       @PathVariable("id") long courseId,
