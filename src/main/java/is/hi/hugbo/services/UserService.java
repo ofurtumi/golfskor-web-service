@@ -88,6 +88,7 @@ public class UserService implements IUserService {
     for (Round UR : user.getRounds()) {
       if(UR.getHoles().length == 9){
         allScores[counter] = UR.getScore()*2;
+        counter++;
         break;
       }
       allScores[counter] = UR.getScore();
