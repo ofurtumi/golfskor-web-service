@@ -4,6 +4,10 @@ import is.hi.hugbo.interfaces.IUserService;
 import is.hi.hugbo.model.Round;
 import is.hi.hugbo.model.User;
 import is.hi.hugbo.repositories.UserRepository;
+
+import java.util.Arrays;
+
+import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
