@@ -81,14 +81,17 @@ public class UserService implements IUserService {
     return arrayToSort;
   }
 
-  public int handicap(User user){
+  public double handicap(User user){
     int counter = 0;
     int sum = 0;
     int[] allScores = new int[user.getRounds().size()];
-    long[] roundId = new long[user.getRounds().size()];
     for (Round UR : user.getRounds()) {
+      if(UR.getHoles().length == 9){
+        allScores[counter] = UR.getScore()*2;
+        counter++;
+        break;
+      }
       allScores[counter] = UR.getScore();
-      roundId[counter] = UR.getId();
       counter++;
     }
 
@@ -111,12 +114,12 @@ public class UserService implements IUserService {
         sum += score;
       }
     }
-    int averageScore;
+    double averageScore;
     if(counter >= 8){
-      averageScore = sum / 8; 
+      averageScore = (double)sum / 8.0; 
     }
     else{
-      averageScore = sum/counter;
+      averageScore = (double)sum/(double)counter;
     }
     return averageScore-72;
   }
