@@ -20,14 +20,14 @@
 
       <div th:if="${user != null}">
         <h1 class="hero" th:text="'Spilari: ' + ${user.username}" />
-        <!-- <h2 th:text="'Forgjöf: '+ ${user.handicap}"> </h2> -->
+        <h2 th:text="'Forgjöf: '+ ${handicap}"> </h2>
 
         <div th:if="${not #lists.isEmpty(rounds)}">
           <h2>Þínir hringir:</h2>
           <section class="rounds">
             <div class="round header">
               <span>Völlur</span>
-              <span>Stig</span>
+              <span>Skor</span>
               <span>Hringur</span>
             </div>
           </section>

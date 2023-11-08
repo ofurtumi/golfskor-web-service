@@ -4,11 +4,12 @@ import is.hi.hugbo.interfaces.IUserService;
 import is.hi.hugbo.model.Round;
 import is.hi.hugbo.model.User;
 import is.hi.hugbo.repositories.UserRepository;
+import is.hi.hugbo.security.PasswordEncoder;
 
 import java.util.Arrays;
 
-import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -16,17 +17,28 @@ public class UserService implements IUserService {
   @Autowired
   UserRepository UR;
 
-  public User register(String username, String password) {
-    User newUser = new User(username, password);
+  @Autowired
+  private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+  public User register(String username, String password) { 
+    User newUser = new User();
+    newUser.setUsername(username);
+    newUser.setPassword(bCryptPasswordEncoder.encode(password));
     UR.save(newUser);
     return newUser;
   }
+  /*
+   * The matches method will compare the raw password with the encrypted one
+   */
+  private boolean checkPassword(User user, String rawPassword) {
+    return bCryptPasswordEncoder.matches(rawPassword, user.getPassword());
+}
 
   public User login(String username, String password) {
     if (userExists(username)) {
 
       User user = UR.findByUsername(username);
-      if (user.getPassword().equals(password)) {
+      if (user != null && checkPassword(user, password)) {
         return user;
       }
     }
@@ -57,5 +69,55 @@ public class UserService implements IUserService {
     User user = round.getUser();
     user.getRounds().remove(round);
     UR.save(user);
+  }
+  
+  public int[] sortByScore(int[] arrayToSort){
+    for( int i = 1; i < arrayToSort.length; i++){
+      int x = arrayToSort[i];
+      int j = Math.abs(Arrays.binarySearch(arrayToSort, 0, i, x) + 1);
+      System.arraycopy(arrayToSort, j, arrayToSort, j + 1, i - j);
+      arrayToSort[j] = x;
+    }
+    return arrayToSort;
+  }
+
+  public int handicap(User user){
+    int counter = 0;
+    int sum = 0;
+    int[] allScores = new int[user.getRounds().size()];
+    long[] roundId = new long[user.getRounds().size()];
+    for (Round UR : user.getRounds()) {
+      allScores[counter] = UR.getScore();
+      roundId[counter] = UR.getId();
+      counter++;
+    }
+
+    if(counter > 20){
+      for(int i = 0; i < 20; i++){
+        allScores[i] = allScores[i+1];
+      }
+    }
+    allScores = sortByScore(allScores);
+    if(counter <= 8){
+      for(int score:allScores){
+        sum += score;
+      }
+    } else {
+      int[] bestEight = new int[8];
+      for(int i = 0; i < 8; i++){
+        bestEight[i] = allScores[i];
+      }
+      for(int score:bestEight){
+        sum += score;
+      }
+    }
+    int averageScore;
+    if(counter >= 8){
+      averageScore = sum / 8; 
+    }
+    else{
+      averageScore = sum/counter;
+    }
+    return averageScore-72;
   }
 }

@@ -26,6 +26,7 @@ public class UserController implements IUserController {
     if (user != null) {
       model.addAttribute("user", user);
       model.addAttribute("rounds", user.getRounds());
+      model.addAttribute("handicap", userService.handicap(user));
     }
     return "home";
   }
