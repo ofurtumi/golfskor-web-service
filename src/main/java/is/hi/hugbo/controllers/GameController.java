@@ -68,7 +68,7 @@ public class GameController implements IGameController {
     if (numHoles != null && numHoles == 9) {
       holes.setSize(9);
     }
-
+    
     course = courseService.findById(courseId);
     model.addAttribute("course", course); 
     
@@ -111,6 +111,7 @@ public class GameController implements IGameController {
       HttpSession session,
       Model model,
       @ModelAttribute Holes holes,
+      @ModelAttribute Course course,
       @PathVariable("id") long roundId) {
 
     Round roundToUpdate = roundService.findById(roundId);
@@ -120,8 +121,12 @@ public class GameController implements IGameController {
     if (roundToUpdate != null && roundUsername.equals(sessionUsername)) {
       model.addAttribute("endpoint", "/round/update/" + roundId);
       holes.setHoles(roundToUpdate.getHoles());
+
+      course = roundToUpdate.getCourse();
+      model.addAttribute("course", course);
+
       return "round";
-    }
+      }
     return "redirect:/"; // return back to homepage
   }
 

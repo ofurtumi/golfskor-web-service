@@ -77,6 +77,7 @@ public interface IGameController {
       HttpSession session,
       Model model,
       @ModelAttribute Holes holes,
+      @ModelAttribute Course course,
       @PathVariable("id") long roundId);
 
   /**
