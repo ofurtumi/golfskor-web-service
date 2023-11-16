@@ -82,26 +82,26 @@ public class UserService implements IUserService {
   }
 
   public double handicap(User user){
-    int counter = 0;
+    int roundsCounter = 0;
     int sum = 0;
     int[] allScores = new int[user.getRounds().size()];
     for (Round UR : user.getRounds()) {
       if(UR.getHoles().length == 9){
-        allScores[counter] = UR.getScore()*2;
-        counter++;
+        allScores[roundsCounter] = UR.getScore()*2;
+        roundsCounter++;
         break;
       }
-      allScores[counter] = UR.getScore();
-      counter++;
+      allScores[roundsCounter] = UR.getScore();
+      roundsCounter++;
     }
-
-    if(counter > 20){
+    
+    if(roundsCounter > 20){ // only have last 20 rounds played
       for(int i = 0; i < 20; i++){
         allScores[i] = allScores[i+1];
       }
     }
     allScores = sortByScore(allScores);
-    if(counter <= 8){
+    if(roundsCounter <= 8){ 
       for(int score:allScores){
         sum += score;
       }
@@ -115,14 +115,14 @@ public class UserService implements IUserService {
       }
     }
     double averageScore;
-    if(counter >= 8){
+    if(roundsCounter >= 8){// if user has played more than 8 rounds then best 8 rounds are calculated
       averageScore = (double)sum / 8.0; 
     }
-    else if(counter != 0){
-      averageScore = (double)sum/(double)counter;
+    else if(roundsCounter != 0){ // so handicap is not NaN
+      averageScore = (double)sum/(double)roundsCounter;
     }
     else{
-      averageScore = 126;
+      averageScore = 126; // starting handicap is 54
     }
     return averageScore-72;
   }
