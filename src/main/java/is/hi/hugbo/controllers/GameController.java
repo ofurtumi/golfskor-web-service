@@ -41,6 +41,7 @@ public class GameController implements IGameController {
     if (user != null) {
       model.addAttribute("user", user);
       model.addAttribute("userHandicap", (int) userService.handicap(user)); // cast to int
+      model.addAttribute("userHandicapHalf", (int) (userService.handicap(user) / 2)); // cast to int
     }
     List<Course> courses = courseService.findAll();
     List<Round> rounds = roundService.findAll();

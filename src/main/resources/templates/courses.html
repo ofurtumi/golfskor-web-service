@@ -23,7 +23,7 @@
           <div th:if="${user != null}" class="course_par">
             <p>Par spilara:</p>
             <p
-              th:text="${(course.calculateSumOfPars(true) + (int)( userHandicap / 2 ))} + ' / ' + ${(course.calculateSumOfPars(false) + userHandicap)}"
+              th:text="${course.calculateSumOfPars(true) + userHandicapHalf} + ' / ' + ${(course.calculateSumOfPars(false) + userHandicap)}"
             />
           </div>
           <div class="course_par">
