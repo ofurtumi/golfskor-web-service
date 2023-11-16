@@ -118,8 +118,11 @@ public class UserService implements IUserService {
     if(counter >= 8){
       averageScore = (double)sum / 8.0; 
     }
-    else{
+    else if(counter != 0){
       averageScore = (double)sum/(double)counter;
+    }
+    else{
+      averageScore = 126;
     }
     return averageScore-72;
   }
