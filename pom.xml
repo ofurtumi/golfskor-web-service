@@ -14,7 +14,7 @@
 	<name>Golfskor</name>
 	<description>Skráðu hringina þína aumingi</description>
 	<properties>
-		<java.version>20</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -53,11 +53,6 @@
       <artifactId>spring-security-crypto</artifactId>
       <version>6.1.4</version>
     </dependency>
-
-    <!-- <dependency> -->
-    <!--   <groupId>org.springframework.boot</groupId> -->
-    <!--   <artifactId>spring-boot-starter-security</artifactId> -->
-    <!-- </dependency> -->
 	</dependencies>
 
 	<build>
