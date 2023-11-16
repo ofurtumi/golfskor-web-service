@@ -13,9 +13,23 @@
 
       <section class="courses">
         <div class="course" th:each="course: ${courses}">
-          <h3 th:text="${course.courseName}"  />
-          <p th:text="'Par vallar: ' + ${course.calculateSumOfPars()}" />
-          <p th:text="'Skráðir hringir: ' + ${course.rounds.size()}" />
+          <h3 th:text="${course.courseName}" />
+          <div class="course_par">
+            <p>Par vallar:</p>
+            <p
+              th:text="${course.calculateSumOfPars(true)} + ' / ' + ${course.calculateSumOfPars(false)}"
+            />
+          </div>
+          <div th:if="${user != null}" class="course_par">
+            <p>Par spilara:</p>
+            <p
+              th:text="${(course.calculateSumOfPars(true) + userHandicap)} + ' / ' + ${(course.calculateSumOfPars(false) + userHandicap)}"
+            />
+          </div>
+          <div class="course_par">
+            <p>Skráðir hringir:</p>
+            <p th:text="${course.rounds.size()}" />
+          </div>
           <div class="registration" th:if="${user != null}">
             <a th:href="'round/' + ${course.id} + '?holes=9'">Skrá 9 holur</a>
             <a th:href="'round/' + ${course.id}">Skrá 18 holur</a>

@@ -40,6 +40,7 @@ public class GameController implements IGameController {
     User user = (User) session.getAttribute("user");
     if (user != null) {
       model.addAttribute("user", user);
+      model.addAttribute("userHandicap", (int) userService.handicap(user)); // cast to int
     }
     List<Course> courses = courseService.findAll();
     List<Round> rounds = roundService.findAll();
@@ -63,16 +64,16 @@ public class GameController implements IGameController {
     if (user == null) {
       return "redirect:/login";
     }
-    
+
+    model.addAttribute("user", user);
     model.addAttribute("endpoint", "/round/" + courseId);
     if (numHoles != null && numHoles == 9) {
       holes.setSize(9);
     }
-    
+
     course = courseService.findById(courseId);
-    model.addAttribute("course", course); 
-    
-    
+    model.addAttribute("course", course);
+
     return "round";
   }
 
@@ -123,10 +124,11 @@ public class GameController implements IGameController {
       holes.setHoles(roundToUpdate.getHoles());
 
       course = roundToUpdate.getCourse();
+      model.addAttribute("user", roundToUpdate.getUser());
       model.addAttribute("course", course);
 
       return "round";
-      }
+    }
     return "redirect:/"; // return back to homepage
   }
 
