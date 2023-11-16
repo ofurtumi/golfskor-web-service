@@ -1,15 +1,13 @@
 package is.hi.hugbo.model;
 
-
 import java.util.List;
 
 import jakarta.persistence.*;
 
-
 @Entity
 @Table(name = "courses", uniqueConstraints = {
     @UniqueConstraint(columnNames = "courseName"),
-    
+
 })
 public class Course {
   @Id
@@ -18,9 +16,7 @@ public class Course {
 
   private String courseName;
 
-
   private Integer[] coursePars;
-
 
   @OneToMany(mappedBy = "course")
   private List<Round> rounds;
@@ -47,6 +43,7 @@ public class Course {
   public void setCourseName(String courseName) {
     this.courseName = courseName;
   }
+
   public Integer[] getCoursePars() {
 
     return coursePars;
@@ -56,15 +53,19 @@ public class Course {
     this.coursePars = coursePars;
   }
 
-  public Integer calculateSumOfPars(){
+  public Integer calculateSumOfPars(boolean front) {
     Integer sum = 0;
-
     if (this.coursePars == null) {
       return sum;
     }
-
-    for(Integer i = 0; i < this.coursePars.length; i++){
-      sum = sum + this.coursePars[i];
+    if (front) {
+      for (Integer i = 0; i < 9; i++) {
+        sum = sum + this.coursePars[i];
+      }
+    } else {
+      for (Integer i = 0; i < this.coursePars.length; i++) {
+        sum = sum + this.coursePars[i];
+      }
     }
     return sum;
   }
