@@ -9,10 +9,10 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>is.hi.hugbo</groupId>
-	<artifactId>Hugbo</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>Hugbo 1</name>
-	<description>Hugbúnaðarverkefni 1</description>
+	<artifactId>Golfskor</artifactId>
+	<version>1.0.0</version>
+	<name>Golfskor</name>
+	<description>Skráðu hringina þína aumingi</description>
 	<properties>
 		<java.version>20</java.version>
 	</properties>
