@@ -12,9 +12,9 @@
 Það þarf postgres server keyrandi á porti `5432` og verkefnið sett upp á móti honum. Stillingar eru gerðar í .env skrá í rótinni, stillingarnar útskýra sig nokkuð vel sjálfar.
 
 ```bash
-# HUGBO_DB_URL=jdbc:postgresql://slóð-á-postgres
-# HUGBO_DB_USER=postgres
-# HUGBO_DB_PASSWORD=postgrespassword
+HUGBO_DB_URL=jdbc:postgresql://slóð-á-postgres
+HUGBO_DB_USER=postgres
+HUGBO_DB_PASSWORD=postgrespassword
 ```
 
 Til að geta keyrt verkefnið upp þarf maven að vera sett upp á vélinni, hægt að nota `brew install maven` á Mac eða svipaða skipun á Linux.
