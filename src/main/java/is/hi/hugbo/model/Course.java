@@ -24,8 +24,9 @@ public class Course {
   public Course() {
   }
 
-  public Course(String courseName) {
+  public Course(String courseName, Integer[] pars) {
     this.courseName = courseName;
+    this.coursePars = pars;
   }
 
   public long getId() {

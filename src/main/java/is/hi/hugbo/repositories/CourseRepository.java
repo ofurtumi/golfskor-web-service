@@ -9,5 +9,7 @@ import is.hi.hugbo.model.Course;
 public interface CourseRepository extends JpaRepository<Course, Long> {
   Course findById(long id);
 
+  Course findByCourseName(String courseName);
+
   List<Course> findAll();
 }
