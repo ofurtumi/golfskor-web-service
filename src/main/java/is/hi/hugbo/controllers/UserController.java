@@ -3,7 +3,11 @@ package is.hi.hugbo.controllers;
 import is.hi.hugbo.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import is.hi.hugbo.interfaces.IUserController;
+import is.hi.hugbo.model.Round;
 import is.hi.hugbo.model.User;
+
+import java.util.Collections;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +29,9 @@ public class UserController implements IUserController {
     User user = (User) session.getAttribute("user");
     if (user != null) {
       model.addAttribute("user", user);
-      model.addAttribute("rounds", user.getRounds());
+      List<Round> rounds = user.getRounds();
+      Collections.reverse(rounds);
+      model.addAttribute("rounds", rounds);
       model.addAttribute("handicap", userService.handicap(user));
     }
     return "home";
