@@ -26,12 +26,12 @@ public class HugboApplication {
   public CommandLineRunner courses(CourseRepository repository) {
     return (args) -> {
       Course[] courses = {
-          new Course("Háskólavöllur", new Integer[] { 4, 4, 3, 4, 5, 4, 3, 3, 5, 4, 2, 5, 4, 4, 3, 5, 4, 4 }),
-          new Course("Hlíðarendavöllur", new Integer[] { 4, 2, 3, 5, 4, 4, 4, 4, 3, 2, 5, 4, 4, 5, 4, 4, 3, 5 }),
-          new Course("Dimmivöllur", new Integer[] { 3, 4, 5, 4, 2, 5, 4, 4, 3, 5, 3, 5, 4, 4, 4, 4, 3, 4 }),
-          new Course("Grafarholt", new Integer[] { 4, 4, 4, 4, 4, 3, 4, 3, 4, 5, 2, 5, 4, 4, 4, 4, 3, 4 }),
-          new Course("Korpa", new Integer[] { 4, 4, 4, 4, 4, 2, 4, 4, 4, 5, 3, 2, 4, 4, 4, 4, 3, 4 }),
-          new Course("Oddur", new Integer[] { 4, 2, 2, 4, 4, 4, 4, 4, 4, 5, 2, 5, 4, 6, 4, 4, 3, 4 })
+          new Course("Háskólavöllur", new Integer[] { 4, 4, 3, 4, 5, 4, 3, 3, 5, 4, 3, 5, 4, 4, 3, 5, 4, 4 }),
+          new Course("Hlíðarendavöllur", new Integer[] { 5, 4, 3, 4, 4, 3, 4, 5, 4, 5, 4, 3, 4, 4, 3, 4, 5, 4 }),
+          new Course("Dimmivöllur", new Integer[] { 3, 4, 5, 4, 4, 5, 4, 4, 3, 5, 3, 5, 4, 4, 4, 4, 3, 4 }),
+          new Course("Grafarholt", new Integer[] { 4, 4, 4, 4, 4, 3, 4, 3, 4, 5, 3, 5, 4, 4, 4, 4, 3, 4 }),
+          new Course("Korpa", new Integer[] { 4, 4, 4, 4, 4, 3, 4, 4, 4, 5, 3, 5, 4, 4, 4, 4, 3, 4 }),
+          new Course("Oddur", new Integer[] { 4, 3, 3, 4, 4, 4, 4, 4, 4, 5, 3, 5, 4, 5, 4, 4, 3, 4 })
       };
 
       for (Course course : courses) {
