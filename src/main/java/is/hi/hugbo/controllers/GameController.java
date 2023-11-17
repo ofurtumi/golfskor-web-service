@@ -40,9 +40,11 @@ public class GameController implements IGameController {
     User user = (User) session.getAttribute("user");
     if (user != null) {
       model.addAttribute("user", user);
+      model.addAttribute("loggedIn", true);
       model.addAttribute("userHandicap", (int) userService.handicap(user)); // cast to int
       model.addAttribute("userHandicapHalf", (int) (userService.handicap(user) / 2)); // cast to int
     }
+
     List<Course> courses = courseService.findAll();
     List<Round> rounds = roundService.findAll();
     Collections.reverse(rounds);
@@ -67,6 +69,7 @@ public class GameController implements IGameController {
     }
 
     model.addAttribute("user", user);
+    model.addAttribute("loggedIn", true);
     model.addAttribute("endpoint", "/round/" + courseId);
     if (numHoles != null && numHoles == 9) {
       holes.setSize(9);
@@ -121,6 +124,7 @@ public class GameController implements IGameController {
     String sessionUsername = ((User) session.getAttribute("user")).getUsername();
 
     if (roundToUpdate != null && roundUsername.equals(sessionUsername)) {
+      model.addAttribute("loggedIn", true);
       model.addAttribute("endpoint", "/round/update/" + roundId);
       holes.setHoles(roundToUpdate.getHoles());
 
