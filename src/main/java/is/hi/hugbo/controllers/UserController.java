@@ -29,6 +29,7 @@ public class UserController implements IUserController {
     User user = (User) session.getAttribute("user");
     if (user != null) {
       model.addAttribute("user", user);
+      model.addAttribute("loggedIn", true);
       List<Round> rounds = user.getRounds();
       Collections.reverse(rounds);
       model.addAttribute("rounds", rounds);
@@ -44,6 +45,7 @@ public class UserController implements IUserController {
     }
 
     model.addAttribute("user", new User());
+    model.addAttribute("loggedIn", false);
     if (error != "") {
       model.addAttribute("error", error);
     }
@@ -83,6 +85,7 @@ public class UserController implements IUserController {
       return "redirect:/";
     }
 
+    model.addAttribute("loggedIn", false);
     model.addAttribute("user", new User());
     if (error != "") {
       model.addAttribute("error", error);

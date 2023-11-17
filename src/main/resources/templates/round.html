@@ -18,12 +18,13 @@
         <div class="holes">
           <label th:each="hole, index : *{holeList}">
             <span th:text="${index.index+1} + '.' " />
-            <span th:text="'(' + ${course.coursePars[__${index.index}__]} + ')'"/>
+            <span
+              th:text="'(' + ${course.coursePars[__${index.index}__]} + ')'"
+            />
             <input
               type="number"
               th:field="*{holeList[__${index.index}__]}"
               th:id="'hole' + ${index.index + 1}"
-              placeholder="stig"
               value=""
               min="1"
               required

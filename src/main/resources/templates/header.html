@@ -5,9 +5,15 @@
         <a href="/">GolfSkor</a>
       </li>
       <li><a href="/courses">Skoða velli</a></li>
-      <li th:if="${user != null}"><a href="/logout">Skrá út</a></li>
-      <li th:if="${user == null}"><a href="/login">Skrá inn</a></li>
-      <li th:if="${user == null}"><a href="/register">Nýskrá</a></li>
+      <li th:if="${loggedIn}">
+        <a href="/logout">Skrá út</a>
+      </li>
+      <li th:if="${loggedIn == null ||!loggedIn}">
+        <a href="/login">Skrá inn</a>
+      </li>
+      <li th:if="${loggedIn == null ||!loggedIn}">
+        <a href="/register">Nýskrá</a>
+      </li>
     </ul>
   </nav>
   <button id="theme_button">☀️</button>
