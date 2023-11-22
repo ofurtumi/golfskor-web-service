@@ -6,6 +6,7 @@ import is.hi.hugbo.interfaces.IUserController;
 import is.hi.hugbo.model.Round;
 import is.hi.hugbo.model.User;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -30,7 +31,7 @@ public class UserController implements IUserController {
     if (user != null) {
       model.addAttribute("user", user);
       model.addAttribute("loggedIn", true);
-      List<Round> rounds = user.getRounds();
+      List<Round> rounds = new ArrayList<Round>(user.getRounds()); // needed because .reverse is in-place
       Collections.reverse(rounds);
       model.addAttribute("rounds", rounds);
       model.addAttribute("handicap", userService.handicap(user));
