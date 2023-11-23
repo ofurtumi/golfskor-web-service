@@ -29,6 +29,7 @@ public class UserController implements IUserController {
   public String getHome(Model model, HttpSession session) {
     User user = (User) session.getAttribute("user");
     if (user != null) {
+      user = userService.findUser(user.getUsername());
       model.addAttribute("user", user);
       model.addAttribute("loggedIn", true);
       List<Round> rounds = new ArrayList<Round>(user.getRounds()); // needed because .reverse is in-place

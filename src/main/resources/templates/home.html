@@ -20,7 +20,9 @@
 
       <div th:if="${user != null}">
         <h1 class="hero" th:text="'Spilari: ' + ${user.username}" />
-        <h2 th:text="'Forgjöf: '+ ${#numbers.formatDecimal(handicap, 1, 1)}"> </h2>
+        <h2
+          th:text="'Forgjöf: '+ ${#numbers.formatDecimal(handicap, 1, 1)}"
+        ></h2>
 
         <div th:if="${not #lists.isEmpty(rounds)}">
           <h2>Þínir hringir:</h2>
@@ -31,7 +33,7 @@
               <span>Hringur</span>
             </div>
           </section>
-          <div class="round" th:each="round: ${user.rounds}">
+          <div class="round" th:each="round: ${rounds}">
             <span th:text="${round.course.courseName}" />
             <span th:text="${round.getScore()}" />
             <ul class="holes">
@@ -50,14 +52,6 @@
               >Breyta Hring</a
             >
           </div>
-          <!-- <ul class="course_rounds"> -->
-          <!--   <li class="course_container" th:each="round: ${rounds}"> -->
-          <!--     <ul class="round"> -->
-          <!--       <li th:each="hole: ${round.getHoles()}" th:text="${hole}" /> -->
-          <!--     </ul> -->
-          <!--     <p th:text="${round.getCourse().getCourseName()}" /> -->
-          <!--   </li> -->
-          <!-- </ul> -->
         </div>
         <div th:if="${#lists.isEmpty(rounds)}">
           <h3>Þú hefur ekki skráð neina hringi</h3>
