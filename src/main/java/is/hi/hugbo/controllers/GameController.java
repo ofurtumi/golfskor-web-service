@@ -41,8 +41,8 @@ public class GameController implements IGameController {
     if (user != null) {
       model.addAttribute("user", user);
       model.addAttribute("loggedIn", true);
-      model.addAttribute("userHandicap", (int) userService.handicap(user)); // cast to int
-      model.addAttribute("userHandicapHalf", (int) (userService.handicap(user) / 2)); // cast to int
+      model.addAttribute("userHandicap", (int) userService.handicap(user));
+      model.addAttribute("userHandicapHalf", (int) (userService.handicap(user) / 2));
     }
 
     List<Course> courses = courseService.findAll();
@@ -120,10 +120,13 @@ public class GameController implements IGameController {
       @PathVariable("id") long roundId) {
 
     Round roundToUpdate = roundService.findById(roundId);
+    User sessionUser = (User) session.getAttribute("user");
+    if (sessionUser == null || roundToUpdate == null) {
+      return "redirect:/login";
+    }
     String roundUsername = roundToUpdate.getUser().getUsername();
-    String sessionUsername = ((User) session.getAttribute("user")).getUsername();
 
-    if (roundToUpdate != null && roundUsername.equals(sessionUsername)) {
+    if (roundToUpdate != null && roundUsername.equals(sessionUser.getUsername())) {
       model.addAttribute("loggedIn", true);
       model.addAttribute("endpoint", "/round/update/" + roundId);
       holes.setHoles(roundToUpdate.getHoles());
@@ -134,7 +137,7 @@ public class GameController implements IGameController {
 
       return "round";
     }
-    return "redirect:/"; // return back to homepage
+    return "redirect:/login";
   }
 
   @PostMapping("/round/update/{id}")

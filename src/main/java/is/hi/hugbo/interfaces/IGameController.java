@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import is.hi.hugbo.model.Holes;
 import is.hi.hugbo.model.Course;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 public interface IGameController {
@@ -72,6 +71,7 @@ public interface IGameController {
    * @param holes   - The hole object with the score
    * @param roundId - The id of the round to update
    * @param request - A request on the HTTP service
+   * @return page to update round if user is logged in, else redirect:/login
    */
   public String updateRound(
       HttpSession session,
@@ -87,7 +87,7 @@ public interface IGameController {
    * @param model   - The model
    * @param session - The session object
    * @param roundId - The id of the round to update
-   * @return
+   * @return redirect:/
    */
   public String postUpdateForm(
       @ModelAttribute Holes holes,

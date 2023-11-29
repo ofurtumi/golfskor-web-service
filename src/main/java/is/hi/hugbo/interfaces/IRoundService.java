@@ -24,8 +24,7 @@ public interface IRoundService {
    * Creates a new round and saves it to the database
    * 
    * @param courseId - The id of the course the round was played on
-   * @param username - The username of the user who created the round,
-   *                 taken from
+   * @param username - The username of the user who created the round, taken from
    *                 the session
    * @param int[]    holes - The scores for each hole
    * @return Newly created round

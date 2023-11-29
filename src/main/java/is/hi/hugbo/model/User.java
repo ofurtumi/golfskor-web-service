@@ -17,8 +17,6 @@ public class User {
 
   private String password;
 
-  // skoða betur sjá:
-  // https://stackoverflow.com/questions/22821695/how-to-fix-hibernate-lazyinitializationexception-failed-to-lazily-initialize-a
   @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
   private List<Round> rounds;
 
