@@ -1,5 +1,6 @@
 package is.hi.hugbo.services;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,10 @@ public class RoundService implements IRoundService {
   public void delete(Round round) {
     RR.delete(round);
     US.removeRound(round);
+  }
+
+  public int[] parseHoles(String holes) {
+    int[] parsedHoles = Arrays.stream(holes.split(",")).mapToInt(Integer::parseInt).toArray();
+    return parsedHoles;
   }
 }

@@ -6,7 +6,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,7 +47,7 @@ public class RestGameController {
   }
 
   @PostMapping("/round")
-  ResponseEntity<?> postRound(
+  ResponseEntity<?> createRound(
       @RequestHeader(value = "Authorization") String authHeader,
       @RequestParam(value = "courseId") int courseId,
       @RequestParam(value = "holes") String holes,
@@ -59,9 +61,65 @@ public class RestGameController {
       return new ResponseEntity<>("Notendanafn og token passa ekki saman", HttpStatus.UNAUTHORIZED);
     }
 
-    int[] parsedHoles = Arrays.stream(holes.split(",")).mapToInt(Integer::parseInt).toArray();
+    int[] parsedHoles = roundService.parseHoles(holes);
 
     Round savedRound = roundService.save(courseId, userId, parsedHoles);
     return new ResponseEntity<>(savedRound, HttpStatus.OK);
+  }
+
+  @PatchMapping("/round")
+  ResponseEntity<?> updateRound(
+      @RequestHeader(value = "Authorization") String authHeader,
+      @RequestParam(value = "roundId") int roundId,
+      @RequestParam(value = "holes") String holes,
+      @RequestParam(value = "userId") int userId) {
+
+    Round roundToUpdate = roundService.findById(roundId);
+
+    if (roundToUpdate == null) {
+      return new ResponseEntity<>("Round not found", HttpStatus.NOT_FOUND);
+    }
+
+    String token = authHeader.substring(7);
+    String tokenUsername = jwtUtils.getUserNameFromJwtToken(token);
+    if (tokenUsername == null) {
+      return new ResponseEntity<>("Auth token tilheyrir ekki notanda", HttpStatus.UNAUTHORIZED);
+    } else if (!tokenUsername.equals(userService.findUser(userId).getUsername())) {
+      return new ResponseEntity<>("Notendanafn og token passa ekki saman", HttpStatus.UNAUTHORIZED);
+    } else if (roundToUpdate.getUser().getId() != userId) {
+      return new ResponseEntity<>("Round tilheyrir ekki user", HttpStatus.UNAUTHORIZED);
+    }
+
+    int[] parsedHoles = roundService.parseHoles(holes);
+    Round updatedRound = roundService.update(roundToUpdate, parsedHoles);
+
+    return new ResponseEntity<>(updatedRound, HttpStatus.OK);
+  }
+
+  @DeleteMapping("/round")
+  ResponseEntity<?> updateRound(
+      @RequestHeader(value = "Authorization") String authHeader,
+      @RequestParam(value = "roundId") int roundId,
+      @RequestParam(value = "userId") int userId) {
+
+    Round roundToDelete = roundService.findById(roundId);
+
+    if (roundToDelete == null) {
+      return new ResponseEntity<>("Round not found", HttpStatus.NOT_FOUND);
+    }
+
+    String token = authHeader.substring(7);
+    String tokenUsername = jwtUtils.getUserNameFromJwtToken(token);
+    if (tokenUsername == null) {
+      return new ResponseEntity<>("Auth token tilheyrir ekki notanda", HttpStatus.UNAUTHORIZED);
+    } else if (!tokenUsername.equals(userService.findUser(userId).getUsername())) {
+      return new ResponseEntity<>("Notendanafn og token passa ekki saman", HttpStatus.UNAUTHORIZED);
+    } else if (roundToDelete.getUser().getId() != userId) {
+      return new ResponseEntity<>("Round tilheyrir ekki user", HttpStatus.UNAUTHORIZED);
+    }
+
+    roundService.delete(roundToDelete);
+
+    return new ResponseEntity<>("Umferð eytt!", HttpStatus.OK);
   }
 }
