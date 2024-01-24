@@ -27,7 +27,7 @@ import is.hi.hugbo.services.UserDetailsImpl;
 import is.hi.hugbo.services.UserService;
 
 @RestController
-@RequestMapping("/api/user/")
+@RequestMapping("/api/user")
 public class RestUserController {
   UserService userService;
 
@@ -45,8 +45,8 @@ public class RestUserController {
   @Autowired
   JwtUtils jwtUtils;
 
-  @GetMapping("info")
   @ResponseBody
+  @GetMapping("/info")
   ResponseEntity<?> info(
       @RequestParam(value = "username", defaultValue = "") String username) {
     if (username.equals("")) {
@@ -60,8 +60,8 @@ public class RestUserController {
     return new ResponseEntity<>(user, HttpStatus.OK);
   }
 
-  @PostMapping("register")
   @ResponseBody
+  @PostMapping("/register")
   ResponseEntity<?> register(
       @RequestParam(value = "username", defaultValue = "") String username,
       @RequestParam(value = "password", defaultValue = "") String password) {
@@ -96,7 +96,7 @@ public class RestUserController {
     return new ResponseEntity<>(loggedInUser, HttpStatus.OK);
   }
 
-  @PostMapping("login")
+  @PostMapping("/login")
   public ResponseEntity<?> authenticateUser(
       @RequestParam(value = "username", defaultValue = "") String username,
       @RequestParam(value = "password", defaultValue = "") String password) {
@@ -113,8 +113,8 @@ public class RestUserController {
         userDetails.getUsername()));
   }
 
-  @PostMapping("delete")
   @ResponseBody
+  @DeleteMapping("/delete")
   ResponseEntity<?> delete(
       @RequestParam(value = "username", defaultValue = "") String username) {
     if (username.equals("")) {
