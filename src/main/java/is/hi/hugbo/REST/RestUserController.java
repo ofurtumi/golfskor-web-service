@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -98,10 +98,12 @@ public class RestUserController {
       @RequestParam(value = "username", defaultValue = "") String username) {
     if (username.equals("")) {
       return new ResponseEntity<>("Notendanafn vantar!", HttpStatus.BAD_REQUEST);
-    }
-    if (!userService.userExists(username)) {
+    } else if (!userService.userExists(username)) {
       return new ResponseEntity<>("Notandi með þetta notendafn ekki til!", HttpStatus.NOT_FOUND);
+    } else if (!username.equals("tester")) {
+      return new ResponseEntity<>("Í augnablikinu má bara eyða \"tester\" notanda!", HttpStatus.FORBIDDEN);
     }
+
     User deletedUser = userService.delete(username);
     return new ResponseEntity<>(deletedUser, HttpStatus.OK);
   }
