@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import is.hi.hugbo.security.jwt.JwtUtils;
@@ -45,7 +44,6 @@ public class RestUserController {
   @Autowired
   JwtUtils jwtUtils;
 
-  @ResponseBody
   @GetMapping("/info")
   ResponseEntity<?> info(
       @RequestParam(value = "username", defaultValue = "") String username) {
@@ -60,7 +58,6 @@ public class RestUserController {
     return new ResponseEntity<>(user, HttpStatus.OK);
   }
 
-  @ResponseBody
   @PostMapping("/register")
   ResponseEntity<?> register(
       @RequestParam(value = "username", defaultValue = "") String username,
@@ -77,23 +74,6 @@ public class RestUserController {
     User newUser = userService.register(username, password);
 
     return new ResponseEntity<>(newUser, HttpStatus.OK);
-  }
-
-  @ResponseBody
-  ResponseEntity<?> login(
-      @RequestParam(value = "username", defaultValue = "") String username,
-      @RequestParam(value = "password", defaultValue = "") String password) {
-    if (username.equals("") || password.equals("")) {
-      return new ResponseEntity<>("Notendanafn og/eða lykilorð vantar!", HttpStatus.BAD_REQUEST);
-    }
-
-    if (!userService.userExists(username)) {
-      return new ResponseEntity<>("Notandi með þetta notendafn ekki til!", HttpStatus.NOT_FOUND);
-    }
-
-    User loggedInUser = userService.login(username, password);
-
-    return new ResponseEntity<>(loggedInUser, HttpStatus.OK);
   }
 
   @PostMapping("/login")
@@ -113,7 +93,6 @@ public class RestUserController {
         userDetails.getUsername()));
   }
 
-  @ResponseBody
   @DeleteMapping("/delete")
   ResponseEntity<?> delete(
       @RequestParam(value = "username", defaultValue = "") String username) {

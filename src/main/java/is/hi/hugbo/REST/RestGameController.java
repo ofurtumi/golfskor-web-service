@@ -1,6 +1,5 @@
 package is.hi.hugbo.REST;
 
-import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import is.hi.hugbo.model.Course;
 import is.hi.hugbo.model.Round;
-import is.hi.hugbo.model.User;
 import is.hi.hugbo.security.jwt.JwtUtils;
 import is.hi.hugbo.services.CourseService;
 import is.hi.hugbo.services.RoundService;
