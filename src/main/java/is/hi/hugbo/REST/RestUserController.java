@@ -5,6 +5,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,8 +21,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import is.hi.hugbo.security.jwt.JwtUtils;
+import is.hi.hugbo.model.Round;
 import is.hi.hugbo.model.User;
 import is.hi.hugbo.payloads.JwtResponse;
+import is.hi.hugbo.services.RoundService;
 import is.hi.hugbo.services.UserDetailsImpl;
 import is.hi.hugbo.services.UserService;
 
@@ -30,9 +33,12 @@ import is.hi.hugbo.services.UserService;
 public class RestUserController {
   UserService userService;
 
+  RoundService roundService;
+
   @Autowired
-  public RestUserController(UserService userService) {
+  public RestUserController(UserService userService, RoundService roundService) {
     this.userService = userService;
+    this.roundService = roundService;
   }
 
   @Autowired
@@ -93,7 +99,7 @@ public class RestUserController {
         userDetails.getUsername()));
   }
 
-  @DeleteMapping("/delete")
+  @DeleteMapping
   ResponseEntity<?> delete(
       @RequestParam(value = "username", defaultValue = "") String username) {
     if (username.equals("")) {
@@ -104,7 +110,15 @@ public class RestUserController {
       return new ResponseEntity<>("Í augnablikinu má bara eyða \"tester\" notanda!", HttpStatus.FORBIDDEN);
     }
 
-    User deletedUser = userService.delete(username);
-    return new ResponseEntity<>(deletedUser, HttpStatus.OK);
+    // cascade fátæka mannsins
+    List<Round> rounds = userService.findUser(username).getRounds();
+    Round[] roundArray = new Round[rounds.size()];
+    rounds.toArray(roundArray);
+    for (int i = 0; i < roundArray.length; i++) {
+      roundService.delete(roundArray[i]);
+    }
+
+    userService.delete(username);
+    return new ResponseEntity<>("User deleted!", HttpStatus.OK);
   }
 }

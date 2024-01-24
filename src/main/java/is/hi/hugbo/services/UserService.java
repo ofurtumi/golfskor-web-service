@@ -8,8 +8,6 @@ import is.hi.hugbo.repositories.UserRepository;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -73,12 +71,11 @@ public class UserService implements IUserService {
     UR.save(user);
   }
 
-  public User delete(String username) {
+  public void delete(String username) {
     User user = UR.findByUsername(username);
     if (user != null) {
       UR.delete(user);
     }
-    return user;
   }
 
   public int[] sortByScore(int[] arrayToSort) {
