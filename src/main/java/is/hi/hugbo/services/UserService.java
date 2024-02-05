@@ -4,12 +4,11 @@ import is.hi.hugbo.interfaces.IUserService;
 import is.hi.hugbo.model.Round;
 import is.hi.hugbo.model.User;
 import is.hi.hugbo.repositories.UserRepository;
-import is.hi.hugbo.security.PasswordEncoder;
 
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -18,12 +17,12 @@ public class UserService implements IUserService {
   UserRepository UR;
 
   @Autowired
-  private BCryptPasswordEncoder bCryptPasswordEncoder;
+  private PasswordEncoder passwordEncoder;
 
   public User register(String username, String password) {
     User newUser = new User();
     newUser.setUsername(username);
-    newUser.setPassword(bCryptPasswordEncoder.encode(password));
+    newUser.setPassword(passwordEncoder.encode(password));
     UR.save(newUser);
     return newUser;
   }
@@ -32,7 +31,7 @@ public class UserService implements IUserService {
    * The matches method will compare the raw password with the encrypted one
    */
   private boolean checkPassword(User user, String rawPassword) {
-    return bCryptPasswordEncoder.matches(rawPassword, user.getPassword());
+    return passwordEncoder.matches(rawPassword, user.getPassword());
   }
 
   public User login(String username, String password) {
@@ -70,6 +69,13 @@ public class UserService implements IUserService {
     User user = round.getUser();
     user.getRounds().remove(round);
     UR.save(user);
+  }
+
+  public void delete(String username) {
+    User user = UR.findByUsername(username);
+    if (user != null) {
+      UR.delete(user);
+    }
   }
 
   public int[] sortByScore(int[] arrayToSort) {
@@ -118,13 +124,11 @@ public class UserService implements IUserService {
     }
 
     double averageScore;
-    if(roundsCounter >= 8){// if user has played more than 8 rounds then best 8 rounds are calculated
-      averageScore = (double)sum / 8.0; 
-    }
-    else if(roundsCounter != 0){ // so handicap is not NaN
-      averageScore = (double)sum/(double)roundsCounter;
-    }
-    else{
+    if (roundsCounter >= 8) {// if user has played more than 8 rounds then best 8 rounds are calculated
+      averageScore = (double) sum / 8.0;
+    } else if (roundsCounter != 0) { // so handicap is not NaN
+      averageScore = (double) sum / (double) roundsCounter;
+    } else {
       averageScore = 126; // starting handicap is 54
 
     }

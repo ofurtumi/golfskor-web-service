@@ -15,6 +15,7 @@
 HUGBO_DB_URL=jdbc:postgresql://<slóð-á-postgres>
 HUGBO_DB_USER=<postgres>
 HUGBO_DB_PASSWORD=<postgrespassword>
+HUGBO_JWT_SECRET=======================Hugbo=Og=Hinir=Lika=Spring===========================
 ```
 
 Til að geta keyrt verkefnið upp þarf maven að vera sett upp á vélinni, hægt að nota `brew install maven` á Mac eða svipaða skipun á Linux.

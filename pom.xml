@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>is.hi.hugbo</groupId>
 	<artifactId>Golfskor</artifactId>
-	<version>1.0.0</version>
+	<version>2.0.0</version>
 	<name>Golfskor</name>
 	<description>Skráðu hringina þína aumingi</description>
 	<properties>
@@ -48,10 +48,35 @@
         <version>42.6.0</version>
     </dependency>
 
-	<dependency>
-      <groupId>org.springframework.security</groupId>
-      <artifactId>spring-security-crypto</artifactId>
-      <version>6.1.4</version>
+    <dependency>
+        <groupId>org.springframework.security</groupId>
+        <artifactId>spring-security-crypto</artifactId>
+        <version>6.1.4</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-security</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-api</artifactId>
+      <version>0.11.5</version>
+    </dependency>
+
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-impl</artifactId>
+      <version>0.11.5</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>io.jsonwebtoken</groupId>
+      <artifactId>jjwt-jackson</artifactId>
+      <version>0.11.5</version>
+      <scope>runtime</scope>
     </dependency>
 	</dependencies>
 
