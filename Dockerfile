@@ -4,4 +4,4 @@ COPY .env .env
 COPY pom.xml pom.xml
 COPY src src
 RUN mvn clean package
-CMD ["java","-jar","/target/Golfskor-1.0.0.jar"]
+CMD ["java","-jar","/target/Golfskor-2.0.0.jar"]
