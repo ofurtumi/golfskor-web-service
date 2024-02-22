@@ -61,6 +61,7 @@ public class WebSecurityConfig {
             .requestMatchers("/api/user/register").permitAll()
             .requestMatchers("/api/user/login").permitAll()
             .requestMatchers("/api/courses").permitAll()
+            .requestMatchers("/api/getround").permitAll()
             .requestMatchers("/api/**").authenticated()
             .requestMatchers("/**").permitAll());
 

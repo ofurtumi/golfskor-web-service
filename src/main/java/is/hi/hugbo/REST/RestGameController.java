@@ -94,6 +94,19 @@ public class RestGameController {
     return new ResponseEntity<>(updatedRound, HttpStatus.OK);
   }
 
+  @GetMapping("/getround")
+  ResponseEntity<?> getRound(
+      @RequestParam(value = "id") int id) {
+
+    Round round = roundService.findById(id);
+
+    if (round == null) {
+      return new ResponseEntity<>("Round not found", HttpStatus.NOT_FOUND);
+    }
+    return new ResponseEntity<>(round, HttpStatus.OK);
+
+  }
+
   @DeleteMapping("/round")
   ResponseEntity<?> updateRound(
       @RequestHeader(value = "Authorization") String authHeader,
