@@ -20,6 +20,7 @@ public class User {
   private String password;
 
   @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+  @OrderBy("id DESC")
   private List<Round> rounds;
 
   public User() {
