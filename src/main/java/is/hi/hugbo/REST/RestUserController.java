@@ -16,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -97,6 +98,39 @@ public class RestUserController {
     return ResponseEntity.ok(new JwtResponse(jwt,
         userDetails.getId(),
         userDetails.getUsername()));
+  }
+
+  @PostMapping("/reload")
+  public ResponseEntity<?> refreshToken(
+      @RequestHeader(value = "Authorization") String authHeader,
+      @RequestParam(value = "username", defaultValue = "") String username) {
+
+    String token = authHeader.substring(7);
+    if (username.equals("") || token.equals("")) {
+      return new ResponseEntity<>("Notendanafn og/eða token vantar!", HttpStatus.BAD_REQUEST);
+    }
+
+    if (!userService.userExists(username)) {
+      return new ResponseEntity<>("Notandi með þetta notendanafn ekki til!", HttpStatus.NOT_FOUND);
+    }
+
+    String tokenUsername = jwtUtils.getUserNameFromJwtToken(token);
+    if (tokenUsername == null) {
+      return new ResponseEntity<>("Token er ekki gilt!", HttpStatus.BAD_REQUEST);
+    } else if (!username.equals(tokenUsername)) {
+      return new ResponseEntity<>("Notendanafn og token passa ekki saman!", HttpStatus.BAD_REQUEST);
+    }
+
+    if (!jwtUtils.validateJwtToken(token)) {
+      return new ResponseEntity<>("Token er útrunninn!", HttpStatus.BAD_REQUEST);
+    }
+
+    String jwt = jwtUtils.generateTokenFromUsername(username);
+    long userId = userService.findUser(username).getId();
+
+    return ResponseEntity.ok(new JwtResponse(jwt,
+        userId,
+        username));
   }
 
   @DeleteMapping
