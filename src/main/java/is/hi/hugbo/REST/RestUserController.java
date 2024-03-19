@@ -100,7 +100,7 @@ public class RestUserController {
         userDetails.getUsername()));
   }
 
-  @PostMapping("/reload")
+  @PostMapping("/refresh")
   public ResponseEntity<?> refreshToken(
       @RequestHeader(value = "Authorization") String authHeader,
       @RequestParam(value = "username", defaultValue = "") String username) {
