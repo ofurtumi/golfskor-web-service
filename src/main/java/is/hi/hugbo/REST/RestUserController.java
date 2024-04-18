@@ -135,13 +135,20 @@ public class RestUserController {
 
   @DeleteMapping
   ResponseEntity<?> delete(
-      @RequestParam(value = "username", defaultValue = "") String username) {
+      @RequestParam(value = "username", defaultValue = "") String username,
+      @RequestHeader(value = "Authorization") String authHeader) {
     if (username.equals("")) {
       return new ResponseEntity<>("Notendanafn vantar!", HttpStatus.BAD_REQUEST);
     } else if (!userService.userExists(username)) {
       return new ResponseEntity<>("Notandi með þetta notendafn ekki til!", HttpStatus.NOT_FOUND);
-    } else if (!username.equals("tester")) {
-      return new ResponseEntity<>("Í augnablikinu má bara eyða \"tester\" notanda!", HttpStatus.FORBIDDEN);
+    }
+
+    String token = authHeader.substring(7);
+    String tokenUsername = jwtUtils.getUserNameFromJwtToken(token);
+    if (tokenUsername == null) {
+      return new ResponseEntity<>("Token er ekki gilt!", HttpStatus.BAD_REQUEST);
+    } else if (!username.equals(tokenUsername)) {
+      return new ResponseEntity<>("Notendanafn og token passa ekki saman!", HttpStatus.BAD_REQUEST);
     }
 
     // cascade fátæka mannsins
